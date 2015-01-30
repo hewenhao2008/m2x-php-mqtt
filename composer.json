@@ -1,0 +1,20 @@
+{
+  "name": "attm2x/m2x-php-mqtt",
+  "license": "MIT",
+  "type": "library",
+  "keywords": ["m2x", "att", "api", "mqtt"],
+  "authors": [
+    {
+      "name": "Jelle Henkens",
+      "email": "jelle@citrusbyte.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Att\\M2XMQTT\\": "src"
+    }
+  }
+}
