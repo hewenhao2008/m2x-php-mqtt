@@ -2,13 +2,12 @@
 
 namespace Att\M2X\MQTT;
 
+use Att\M2X\MQTT\Packet\Packet;
 use Att\M2X\MQTT\Packet\ConnectPacket;
 
 require_once 'Hexdump.php';
 
 mb_internal_encoding('UTF-8');
-
-
 
 class MQTTClient {
 
@@ -48,32 +47,32 @@ class MQTTClient {
  * @return void
  */
   public function connect() {
-    $packetObj = new ConnectPacket(array('clientId' => 'PHP'));
-    $packet = $packetObj->encode();
+    echo "CONNECT packet\n\r";
 
-  	echo "CONNECT Packet:\n\r";
-  	hexdump($packet);
-
-  	$ip = gethostbyname('api-m2x.att.com');
-  	$ip = '127.0.0.1';
-  	socket_connect($this->socket, $ip, 1883);
-
-  	$written = socket_write($this->socket, $packet, strlen($packet));
-  	echo "Bytes written to the socket: {$written}\n\r";
-
-  	$result = socket_read($this->socket, 4);
-  	echo "Received Packet:\n\r";
-  	hexdump($result);
+    $ip = gethostbyname('api-m2x.att.com');
+    $ip = '127.0.0.1';
+    socket_connect($this->socket, $ip, 1883);
 
 
+    $packet = new ConnectPacket(array('clientId' => 'PHP'));
+    $this->write($packet);
+  	$this->read();
   }
 
-  private function endianString($string) {
-  	$buffer = array(0x00, strlen($string));
-  	foreach (str_split($string) as $char) {
-  		$buffer[] = ord($char);
-  	}
-  	return $buffer;
+  protected function write(Packet $packet) {
+    $encoded = $packet->encode();
+
+    echo "Writing to socket\n\r";
+    hexdump($encoded);
+
+    $written = socket_write($this->socket, $encoded, strlen($encoded));
+
+    echo "Bytes written to the socket: {$written}\n\r\n\r";
   }
 
+  protected function read() {
+    $raw = socket_read($this->socket, 4);
+    echo "Received Packet:\n\r";
+    hexdump($raw);
+  }
 }
