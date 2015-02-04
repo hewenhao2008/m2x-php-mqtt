@@ -52,7 +52,7 @@ class ConnectPacket extends Packet {
 
   public function encodeBody() {
     $this->encodeString(self::PROTOCOL_NAME);
-    $this->buffer[] = self::PROTOCOL_VERSION;
+    $this->buffer .= pack('C', self::PROTOCOL_VERSION);
 
     //Flags
     $flags = 0;
@@ -69,11 +69,10 @@ class ConnectPacket extends Packet {
       $flags = $flags || 0x02;
     }
 
-    $this->buffer[] = $flags;
+    $this->buffer .= pack('C', $flags);
 
     //Keep Alive
-    $this->buffer[] = 0x00;
-    $this->buffer[] = $this->keepAlive;
+    $this->buffer .= pack('C*', 0x00, $this->keepAlive);
 
     //Payload
     $this->encodeString($this->clientId);

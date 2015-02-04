@@ -4,6 +4,7 @@ namespace Att\M2X\MQTT;
 
 use Att\M2X\MQTT\Packet\Packet;
 use Att\M2X\MQTT\Packet\ConnectPacket;
+use Att\M2X\MQTT\Packet\PublishPacket;
 use Att\M2X\MQTT\Error\ProtocolException;
 
 require_once 'Hexdump.php';
@@ -18,10 +19,11 @@ class MQTTClient {
  * These flags indicates the level of assurance for delivery of a PUBLISH message.
  *
  */
-  const QOS1 = 0x00;
-  const QOS2 = 0x02;
-  const QOS3 = 0x04;
-
+  const QOS0 = 0x00;
+  const QOS1 = 0x02;
+  const QOS2 = 0x04;
+  const RETAIN = 0x01;
+  const DUP = 0x08;
 
 /**
  * Hostname of the remote server
@@ -105,6 +107,15 @@ class MQTTClient {
 
     $this->sendPacket($packet);
   	$this->receiveConnack();
+  }
+
+  public function publish($topic, $payload = '', $flags = 0x00) {
+    $packet = new PublishPacket(array(
+      'topic' => $topic,
+      'payload' => $payload
+    ));
+
+    $this->sendPacket($packet);
   }
 
   protected function sendPacket(Packet $packet) {

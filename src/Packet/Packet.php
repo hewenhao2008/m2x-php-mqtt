@@ -6,7 +6,8 @@ class Packet {
 
   static $PACKET_TYPES = array(
     1 => '\Att\M2X\MQTT\Packet\ConnectPacket',
-    2 => '\Att\M2X\MQTT\Packet\ConnackPacket'
+    2 => '\Att\M2X\MQTT\Packet\ConnackPacket',
+    3 => '\Att\M2X\MQTT\Packet\PublishPacket'
   );
 
   const PROTOCOL_NAME = 'MQIsdp';
@@ -15,13 +16,14 @@ class Packet {
 
   const TYPE_CONNECT = 0x10;
   const TYPE_CONNACK = 0x20;
+  const TYPE_PUBLISH = 0x30;
 
 /**
- * Holds the byte buffer to be sent to the broker
+ * Holds the buffer to be sent to the broker
  *
  * @var array
  */
-  protected $buffer = array();
+  protected $buffer = '';
 
 /**
  * The message type
@@ -35,10 +37,11 @@ class Packet {
  *
  * @var integer
  */
-  protected $flags = 0;
+  protected $flags = 0x00;
 
-  public function __construct($type) {
+  public function __construct($type, $flags = 0x00) {
   	$this->type = $type;
+    $this->flags = $flags;
   }
 
 /**
@@ -50,20 +53,16 @@ class Packet {
  * @return void
  */
   protected function encodeString($string) {
-    $this->buffer[] = 0x00;
-    $this->buffer[] = strlen($string);
-
-    foreach (str_split($string) as $char) {
-      $this->buffer[] = ord($char);
-    }
+    $this->buffer .= pack('C*', 0x00, strlen($string));
+    $this->buffer .= $string;
   }
 
   protected function encodeBody() {}
 
   public function encode() {
     $this->encodeBody();
-    array_unshift($this->buffer, $this->type, count($this->buffer));
-    return call_user_func_array('pack', array_merge(array("C*"), $this->buffer));
+    $header = pack('C*', $this->type | $this->flags, strlen($this->buffer));
+    return $header . $this->buffer;
   }
 
   static function read($socket) {
