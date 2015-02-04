@@ -45,6 +45,14 @@ class MQTTClient {
   protected $socket = null;
 
 /**
+ * The Client Identifier (Client ID) is between 1 and 23 characters long,
+ * and uniquely identifies the client to the server.
+ *
+ * @var string
+ */
+  protected $clientId = null;
+
+/**
  * The username for authenticating with the server
  *
  * @var string
@@ -90,7 +98,7 @@ class MQTTClient {
     socket_connect($this->socket, $this->host, $this->port);
 
     $packet = new ConnectPacket(array(
-      'clientId' => 'PHP',
+      'clientId' => $this->clientId,
       'username' => $this->username,
       'password' => $this->password
     ));
