@@ -4,6 +4,7 @@ namespace Att\M2X\MQTT;
 
 use Att\M2X\MQTT\Packet\Packet;
 use Att\M2X\MQTT\Packet\ConnectPacket;
+use Att\M2X\MQTT\Error\ProtocolException;
 
 require_once 'Hexdump.php';
 
@@ -23,11 +24,39 @@ class MQTTClient {
 
 
 /**
+ * Hostname of the remote server
+ *
+ * @var string
+ */
+  protected $host = null;
+
+/**
+ * Port of the remote server (default: 1883)
+ *
+ * @var integer
+ */
+  protected $port = 1883;
+
+/**
  * Holds the socket resource
  *
  * @var resource
  */
   protected $socket = null;
+
+/**
+ * The username for authenticating with the server
+ *
+ * @var string
+ */
+  protected $username = null;
+
+/**
+ * The password for authenticating with the server
+ *
+ * @var string
+ */
+  protected $password = null;
 
 /**
  * The QOS level used
@@ -36,7 +65,15 @@ class MQTTClient {
  */
   protected $qos = self::QOS1;
 
-  public function __construct() {
+  public function __construct($host, $options = array()) {
+    $this->host = $host;
+
+    foreach ($options as $name => $value) {
+      if (property_exists($this, $name)) {
+        $this->{$name} = $value;
+      }
+    }
+
     $this->socket = socket_create(AF_INET, SOCK_STREAM, 0);
     socket_set_block($this->socket);
   }
@@ -45,29 +82,44 @@ class MQTTClient {
  * Connect to the broker
  *
  * @return void
+ * @throws ProtocolException
  */
   public function connect() {
     echo "CONNECT packet\n\r";
 
-    $ip = gethostbyname('api-m2x.att.com');
-    $ip = '127.0.0.1';
-    socket_connect($this->socket, $ip, 1883);
+    socket_connect($this->socket, $this->host, $this->port);
 
+    $packet = new ConnectPacket(array(
+      'clientId' => 'PHP',
+      'username' => $this->username,
+      'password' => $this->password
+    ));
 
-    $packet = new ConnectPacket(array('clientId' => 'PHP'));
-    $this->write($packet);
-  	$this->read();
+    $this->sendPacket($packet);
+  	$this->receiveConnack();
   }
 
-  protected function write(Packet $packet) {
+  protected function sendPacket(Packet $packet) {
     $encoded = $packet->encode();
-
-    echo "Writing to socket\n\r";
-    hexdump($encoded);
-
     $written = socket_write($this->socket, $encoded, strlen($encoded));
+  }
 
-    echo "Bytes written to the socket: {$written}\n\r\n\r";
+/**
+ * Handle the response of the CONNECT call and check for a successfull connection
+ *
+ * @return void
+ * @throws ProtocolException
+ */
+  protected function receiveConnack() {
+    $packet = Packet::read($this->socket);
+
+    if ($packet->type() !== Packet::TYPE_CONNACK) {
+      throw new ProtocolException('Response was not a CONNACK packet');
+    }
+
+    if (!$packet->accepted()) {
+      throw new ProtocolException($packet->returnMessage());
+    }
   }
 
   protected function read() {
