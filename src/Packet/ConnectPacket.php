@@ -58,15 +58,15 @@ class ConnectPacket extends Packet {
     $flags = 0;
 
     if ($this->username !== null) {
-      $flags = $flags || 0x80;
+      $flags = $flags | 0x80;
     }
 
     if ($this->password !== null) {
-      $flags = $flags || 0x40;
+      $flags = $flags | 0x40;
     }
 
     if ($this->cleanSession) {
-      $flags = $flags || 0x02;
+      $flags = $flags | 0x02;
     }
 
     $this->buffer .= pack('C', $flags);
