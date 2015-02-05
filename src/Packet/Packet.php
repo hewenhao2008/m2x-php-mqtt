@@ -7,7 +7,9 @@ class Packet {
   static $PACKET_TYPES = array(
     1 => '\Att\M2X\MQTT\Packet\ConnectPacket',
     2 => '\Att\M2X\MQTT\Packet\ConnackPacket',
-    3 => '\Att\M2X\MQTT\Packet\PublishPacket'
+    3 => '\Att\M2X\MQTT\Packet\PublishPacket',
+    8 => '\Att\M2X\MQTT\Packet\SubscribePacket',
+    9 => '\Att\M2X\MQTT\Packet\SubackPacket'
   );
 
   const PROTOCOL_NAME = 'MQIsdp';
@@ -17,6 +19,8 @@ class Packet {
   const TYPE_CONNECT = 0x10;
   const TYPE_CONNACK = 0x20;
   const TYPE_PUBLISH = 0x30;
+  const TYPE_SUBSCRIBE = 0x80;
+  const TYPE_SUBACK = 0x90;
 
 /**
  * Holds the buffer to be sent to the broker
@@ -31,6 +35,13 @@ class Packet {
  * @var null
  */
   protected $type = null;
+
+/**
+ * Identifier to link control packets together
+ *
+ * @var integer
+ */
+  protected $id = 0;
 
 /**
  * The 4 bits of flags in the fixed header
@@ -59,6 +70,8 @@ class Packet {
 
   protected function encodeBody() {}
 
+  protected function parseBody($data) {}
+
   public function encode() {
     $this->encodeBody();
     $header = pack('C*', $this->type | $this->flags, strlen($this->buffer));
@@ -72,7 +85,7 @@ class Packet {
     $packetType = $header[1] >> 4;
 
     if (!array_key_exists($packetType, self::$PACKET_TYPES)) {
-      throw new Exception('Invalid packet type received');
+      throw new \Exception('Invalid packet type received');
     }
 
     $packet = new self::$PACKET_TYPES[$packetType];

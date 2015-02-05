@@ -5,6 +5,7 @@ namespace Att\M2X\MQTT;
 use Att\M2X\MQTT\Packet\Packet;
 use Att\M2X\MQTT\Packet\ConnectPacket;
 use Att\M2X\MQTT\Packet\PublishPacket;
+use Att\M2X\MQTT\Packet\SubscribePacket;
 use Att\M2X\MQTT\Error\ProtocolException;
 
 require_once 'Hexdump.php';
@@ -68,12 +69,14 @@ class MQTTClient {
  */
   protected $password = null;
 
+  protected $lastPacketId = 0;
+
 /**
  * The QOS level used
  *
  * @var integer
  */
-  protected $qos = self::QOS1;
+  protected $qos = self::QOS0;
 
   public function __construct($host, $options = array()) {
     $this->host = $host;
@@ -118,8 +121,20 @@ class MQTTClient {
     $this->sendPacket($packet);
   }
 
+  public function subscribe($topic, $flags = 0x00) {
+    $packet = new SubscribePacket(array(
+      'id' => $this->nextPacketId(),
+      'topic' => $topic
+    ));
+
+    $this->sendPacket($packet);
+    $this->receivePacket();
+  }
+
   protected function sendPacket(Packet $packet) {
     $encoded = $packet->encode();
+    echo "Sending packet:\n\r";
+    hexdump($encoded);
     $written = socket_write($this->socket, $encoded, strlen($encoded));
   }
 
@@ -141,9 +156,27 @@ class MQTTClient {
     }
   }
 
-  protected function read() {
-    $raw = socket_read($this->socket, 4);
-    echo "Received Packet:\n\r";
-    hexdump($raw);
+  protected function receivePacket() {
+    while(true) {
+      echo "socket_select() polling\n\r";
+
+      $r = array($this->socket);
+      $w = $e = array();
+      $result = socket_select($r, $w, $e, 1);
+      
+      if ($result) {
+        return Packet::read($this->socket);
+      }
+    }
+  }
+
+/**
+ * Returns the next available packet id
+ *
+ * @return integer
+ */
+  protected function nextPacketId() {
+    $this->lastPacketId++;
+    return $this->lastPacketId;
   }
 }
