@@ -22,4 +22,14 @@ class PublishPacket extends Packet {
     $this->encodeString($this->topic);
     $this->buffer .= $this->payload;
   }
+
+  public function parseBody($data) {
+    $bounds = unpack('C2', $data);
+    $this->topic = mb_substr($data, 2, $bounds[2]);
+    $this->payload = mb_substr($data, 2 + $bounds[2]);
+  }
+
+  public function payload() {
+    return $this->payload;
+  }
 }

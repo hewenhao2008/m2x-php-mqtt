@@ -7,12 +7,13 @@ use Att\M2X\MQTT\Packet\ConnectPacket;
 use Att\M2X\MQTT\Packet\PublishPacket;
 use Att\M2X\MQTT\Packet\SubscribePacket;
 use Att\M2X\MQTT\Error\ProtocolException;
+use Att\M2X\MQTT\MQTTResponse;
 
 require_once 'Hexdump.php';
 
 mb_internal_encoding('UTF-8');
 
-class MQTTClient {
+class MQTTClient extends \Att\M2X\M2X {
 
   const VERSION = '2.0.0';
 
@@ -71,6 +72,8 @@ class MQTTClient {
 
   protected $lastPacketId = 0;
 
+  protected $apiKey = '';
+
 /**
  * The QOS level used
  *
@@ -78,8 +81,9 @@ class MQTTClient {
  */
   protected $qos = self::QOS0;
 
-  public function __construct($host, $options = array()) {
+  public function __construct($host, $apiKey, $options = array()) {
     $this->host = $host;
+    $options['username'] = $this->apiKey = $apiKey;
 
     foreach ($options as $name => $value) {
       if (property_exists($this, $name)) {
@@ -98,7 +102,7 @@ class MQTTClient {
  * @throws ProtocolException
  */
   public function connect() {
-    echo "CONNECT packet\n\r";
+    //echo "CONNECT packet\n\r";
 
     socket_connect($this->socket, $this->host, $this->port);
 
@@ -110,6 +114,9 @@ class MQTTClient {
 
     $this->sendPacket($packet);
   	$this->receiveConnack();
+
+    //TODO: Find a better place for this
+    $this->subscribe(sprintf('m2x/%s/responses', $this->apiKey));
   }
 
   public function publish($topic, $payload = '', $flags = 0x00) {
@@ -133,8 +140,8 @@ class MQTTClient {
 
   protected function sendPacket(Packet $packet) {
     $encoded = $packet->encode();
-    echo "Sending packet:\n\r";
-    hexdump($encoded);
+    //echo "Sending packet:\n\r";
+    //hexdump($encoded);
     $written = socket_write($this->socket, $encoded, strlen($encoded));
   }
 
@@ -158,7 +165,7 @@ class MQTTClient {
 
   protected function receivePacket() {
     while(true) {
-      echo "socket_select() polling\n\r";
+      //echo "socket_select() polling\n\r";
 
       $r = array($this->socket);
       $w = $e = array();
@@ -178,5 +185,22 @@ class MQTTClient {
   protected function nextPacketId() {
     $this->lastPacketId++;
     return $this->lastPacketId;
+  }
+
+  public function get($path, $params = array()) {
+    $uri = '/v2' . $path;
+
+    $payload = array(
+      'id' => rand(1000, 9000),
+      'method' => 'GET',
+      'resource' => $uri
+    );
+
+    $this->publish(sprintf('m2x/%s/requests', $this->apiKey), json_encode($payload));
+
+    $packet = $this->receivePacket();
+
+    $response = new MQTTResponse($packet->payload());
+    return $this->handleResponse($response);
   }
 }
