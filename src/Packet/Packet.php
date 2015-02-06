@@ -70,6 +70,11 @@ class Packet {
 
   protected function encodeBody() {}
 
+  public function parse($header, $data) {
+    $this->buffer = $data;
+    $this->parseBody($data);
+  }
+
   protected function parseBody($data) {}
 
   public function encode() {
@@ -92,7 +97,7 @@ class Packet {
 
     //Read body
     $data = $socket->read($header[2]);
-    $packet->parseBody($data);
+    $packet->parse($header, $data);
 
     return $packet;
   }

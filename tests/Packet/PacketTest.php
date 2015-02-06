@@ -1,6 +1,7 @@
 <?php
 
 use Att\M2X\MQTT\Packet\Packet;
+use Att\M2X\MQTT\Test\FileStreamSocket;
 
 class PacketTest extends BaseTestCase {
 
@@ -56,6 +57,20 @@ class PacketTest extends BaseTestCase {
     );
 
     $this->assertEquals($expected, $packet->encode());
+  }
+
+/**
+ * testRead method
+ *
+ * @return void
+ */
+  public function testRead() {
+    $socket = new FileStreamSocket();
+    $socket->connect(__DIR__ . '/../test_packets/connack_not_authorized.hex');
+
+    $result = Packet::read($socket);
+    $expected = pack('C*', 0x00, 0x05);
+    $this->assertEquals($expected, $result->buffer());
   }
 
 /**
