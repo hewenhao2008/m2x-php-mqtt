@@ -8,6 +8,7 @@ use Att\M2X\MQTT\Packet\PublishPacket;
 use Att\M2X\MQTT\Packet\SubscribePacket;
 use Att\M2X\MQTT\Error\ProtocolException;
 use Att\M2X\MQTT\MQTTResponse;
+use Att\M2X\MQTT\Net\Socket;
 
 require_once 'Hexdump.php';
 
@@ -42,9 +43,9 @@ class MQTTClient extends \Att\M2X\M2X {
   protected $port = 1883;
 
 /**
- * Holds the socket resource
+ * Holds the socket class
  *
- * @var resource
+ * @var Socket
  */
   protected $socket = null;
 
@@ -91,8 +92,7 @@ class MQTTClient extends \Att\M2X\M2X {
       }
     }
 
-    $this->socket = socket_create(AF_INET, SOCK_STREAM, 0);
-    socket_set_block($this->socket);
+    $this->socket()->create();
   }
 
 /**
@@ -102,9 +102,7 @@ class MQTTClient extends \Att\M2X\M2X {
  * @throws ProtocolException
  */
   public function connect() {
-    //echo "CONNECT packet\n\r";
-
-    socket_connect($this->socket, $this->host, $this->port);
+    $this->socket()->connect($this->host, $this->port);
 
     $packet = new ConnectPacket(array(
       'clientId' => $this->clientId,
@@ -140,9 +138,7 @@ class MQTTClient extends \Att\M2X\M2X {
 
   protected function sendPacket(Packet $packet) {
     $encoded = $packet->encode();
-    //echo "Sending packet:\n\r";
-    //hexdump($encoded);
-    $written = socket_write($this->socket, $encoded, strlen($encoded));
+    $this->socket()->write($encoded);
   }
 
 /**
@@ -152,7 +148,7 @@ class MQTTClient extends \Att\M2X\M2X {
  * @throws ProtocolException
  */
   protected function receiveConnack() {
-    $packet = Packet::read($this->socket);
+    $packet = Packet::read($this->socket());
 
     if ($packet->type() !== Packet::TYPE_CONNACK) {
       throw new ProtocolException('Response was not a CONNACK packet');
@@ -164,15 +160,11 @@ class MQTTClient extends \Att\M2X\M2X {
   }
 
   protected function receivePacket() {
-    while(true) {
-      //echo "socket_select() polling\n\r";
+    $socket = $this->socket();
 
-      $r = array($this->socket);
-      $w = $e = array();
-      $result = socket_select($r, $w, $e, 1);
-      
-      if ($result) {
-        return Packet::read($this->socket);
+    while(true) {
+      if ($socket->dataAvailable()) {
+        return Packet::read($socket);
       }
     }
   }
@@ -202,5 +194,17 @@ class MQTTClient extends \Att\M2X\M2X {
 
     $response = new MQTTResponse($packet->payload());
     return $this->handleResponse($response);
+  }
+
+/**
+ * Return the socket instance, create new one if needed
+ *
+ * @return Socket
+ */
+  public function socket() {
+    if ($this->socket == NULL) {
+      $this->socket = new Socket();
+    }
+    return $this->socket;
   }
 }

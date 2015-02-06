@@ -79,7 +79,7 @@ class Packet {
   }
 
   static function read($socket) {
-    $data = socket_read($socket, 2);
+    $data = $socket->read(2);
     $header = unpack('C*', $data);
 
     $packetType = $header[1] >> 4;
@@ -91,7 +91,7 @@ class Packet {
     $packet = new self::$PACKET_TYPES[$packetType];
 
     //Read body
-    $data = socket_read($socket, $header[2]);
+    $data = $socket->read($header[2]);
     $packet->parseBody($data);
 
     return $packet;
