@@ -84,21 +84,31 @@ class Packet {
   }
 
   static function read($socket) {
-    $data = $socket->read(2);
-    $header = unpack('C*', $data);
-
+    $byte = $socket->read(1);
+    $header = unpack('C', $byte);
     $packetType = $header[1] >> 4;
 
     if (!array_key_exists($packetType, self::$PACKET_TYPES)) {
       throw new \Exception('Invalid packet type received');
     }
 
-    $packet = new self::$PACKET_TYPES[$packetType];
+    //Calculate remaining length
+    $multiplier = 1;
+    $length = 0;
+    while(true) {
+      $digit = current(unpack('C', $socket->read(1)));
+      $length += ($digit & 127) * $multiplier;
+      $multiplier *= 128;
+      if (($digit & 128) == 0) {
+        break;
+      }
+    }
 
     //Read body
-    $data = $socket->read($header[2]);
-    $packet->parse($header, $data);
+    $data = $socket->read($length);
 
+    $packet = new self::$PACKET_TYPES[$packetType];
+    $packet->parse($header, $data);
     return $packet;
   }
 
