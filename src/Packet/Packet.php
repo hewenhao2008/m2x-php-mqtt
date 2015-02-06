@@ -105,4 +105,13 @@ class Packet {
   public function type() {
     return $this->type;
   }
+
+/**
+ * Return the buffer
+ *
+ * @return string
+ */
+  public function buffer() {
+    return $this->buffer;
+  }
 }

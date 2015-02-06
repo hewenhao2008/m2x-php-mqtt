@@ -91,8 +91,6 @@ class MQTTClient extends \Att\M2X\M2X {
         $this->{$name} = $value;
       }
     }
-
-    $this->socket()->create();
   }
 
 /**
@@ -102,6 +100,7 @@ class MQTTClient extends \Att\M2X\M2X {
  * @throws ProtocolException
  */
   public function connect() {
+    $this->socket()->create();
     $this->socket()->connect($this->host, $this->port);
 
     $packet = new ConnectPacket(array(
@@ -174,7 +173,7 @@ class MQTTClient extends \Att\M2X\M2X {
  *
  * @return integer
  */
-  protected function nextPacketId() {
+  public function nextPacketId() {
     $this->lastPacketId++;
     return $this->lastPacketId;
   }
