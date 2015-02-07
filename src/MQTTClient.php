@@ -71,9 +71,12 @@ class MQTTClient extends \Att\M2X\M2X {
  */
   protected $password = null;
 
+/**
+ * Holds the counter for control packets
+ *
+ * @var integer
+ */
   protected $lastPacketId = 0;
-
-  protected $apiKey = '';
 
 /**
  * The QOS level used
@@ -116,6 +119,14 @@ class MQTTClient extends \Att\M2X\M2X {
     $this->subscribe(sprintf('m2x/%s/responses', $this->apiKey));
   }
 
+/**
+ * Publish a message to the broker.
+ *
+ * @param string $topic
+ * @param string $payload
+ * @param string $flags
+ * @return void
+ */
   public function publish($topic, $payload = '', $flags = 0x00) {
     $packet = new PublishPacket(array(
       'topic' => $topic,
@@ -125,6 +136,13 @@ class MQTTClient extends \Att\M2X\M2X {
     $this->sendPacket($packet);
   }
 
+/**
+ * Subscribe to a topic
+ *
+ * @param string $topic
+ * @param string $flags
+ * @return void
+ */
   public function subscribe($topic, $flags = 0x00) {
     $packet = new SubscribePacket(array(
       'id' => $this->nextPacketId(),
@@ -135,6 +153,12 @@ class MQTTClient extends \Att\M2X\M2X {
     $this->receivePacket();
   }
 
+/**
+ * Send a Packet object to the broker
+ *
+ * @param Packet $packet
+ * @return void
+ */
   protected function sendPacket(Packet $packet) {
     $encoded = $packet->encode();
     $this->socket()->write($encoded);
@@ -158,6 +182,11 @@ class MQTTClient extends \Att\M2X\M2X {
     }
   }
 
+/**
+ * Listen on the socket and receive a single packet.
+ *
+ * @return Packet
+ */
   protected function receivePacket() {
     $socket = $this->socket();
 

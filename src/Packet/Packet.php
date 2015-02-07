@@ -68,21 +68,54 @@ class Packet {
     $this->buffer .= $string;
   }
 
+/**
+ * Encoded the packet properties into the buffer.
+ * This method has to be overwritten in the subclass.
+ *
+ * @return void
+ */
   protected function encodeBody() {}
 
+/**
+ * Initializes the packet from a binary string received from the socket.
+ *
+ * @param string $header
+ * @param string $data
+ * @return void
+ */
   public function parse($header, $data) {
     $this->buffer = $data;
     $this->parseBody($data);
   }
 
+/**
+ * Parses the body and sets the properties of the Packet object.
+ * This method has to be overwritten in the subclass.
+ *
+ * @param string $data
+ * @return void
+ */
   protected function parseBody($data) {}
 
+/**
+ * Encode a packet object and return the binary string
+ * that can be sent to the socket.
+ *
+ * @return string
+ */
   public function encode() {
     $this->encodeBody();
     $header = pack('C*', $this->type | $this->flags, strlen($this->buffer));
     return $header . $this->buffer;
   }
 
+/**
+ * Read a packet from a socket.
+ *
+ * @param Socket $socket
+ * @return Packet
+ * @throws Exception
+ */
   static function read($socket) {
     $byte = $socket->read(1);
     $header = unpack('C', $byte);
