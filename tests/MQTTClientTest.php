@@ -18,7 +18,7 @@ class MQTTClientTest extends BaseTestCase {
   }
 
 /**
- * testConnetSocketException method
+ * testConnectSocketException method
  *
  * @expectedException \Att\M2X\MQTT\Error\SocketException
  * @expectedExceptionMessage Connection refused
@@ -26,7 +26,21 @@ class MQTTClientTest extends BaseTestCase {
  * @return void
  */
   public function testConnectSocketException() {
-  	$client = new MQTTClient('0.0.0.0', 'foobar');
-  	$client->connect();
+    $client = new MQTTClient('0.0.0.0', 'foobar');
+    $client->connect();
+  }
+
+/**
+ * testDevices method
+ *
+ * @return void
+ */
+  public function testDevices() {
+    $client = new MockMQTTClient('0.0.0.0', 'foobar');
+    $socket = $this->createTestSocket('api_list_devices');
+    $client->socket = $socket;
+
+    $result = $client->devices();
+    $this->assertEquals(3, $result->count());
   }
 }

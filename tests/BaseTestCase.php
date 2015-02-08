@@ -2,12 +2,11 @@
 
 use Att\M2X\MQTT\MQTTClient;
 use Att\M2X\MQTT\Net\Socket;
+use Att\M2X\MQTT\Test\FileStreamSocket;
 
 class MockMQTTClient extends MQTTClient {
 
-  public function setSocket($socket) {
-    $this->socket = $socket;
-  }
+  public $socket = null;
 }
 
 abstract class BaseTestCase extends PHPUnit_Framework_TestCase {
@@ -20,6 +19,19 @@ abstract class BaseTestCase extends PHPUnit_Framework_TestCase {
 
   protected function tearDown() {
     $this->socket = null;
+  }
+
+/**
+ * Creates a new FileSocket and sets it up to use a test packet
+ * from the test_packets directory.
+ *
+ * @param string $packetName
+ * @return FileStreamSocket
+ */
+  protected function createTestSocket($packetName) {
+    $socket = new FileStreamSocket();
+    $socket->connect(__DIR__ . sprintf('/test_packets/%s.hex', $packetName));
+    return $socket;
   }
 
 /**
