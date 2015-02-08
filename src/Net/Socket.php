@@ -6,12 +6,29 @@ use Att\M2X\MQTT\Error\SocketException;
 
 class Socket {
 
+  const READ_BUFFER_SIZE = 512;
+
 /**
  * Holds the internal socket resource
  *
  * @var resource
  */
   protected $socket = null;
+
+/**
+ * If log is set to true, all data received will be written
+ * to the internal buffer.
+ *
+ * @var boolean
+ */
+  protected $log = false;
+
+/**
+ * Holds the internal buffer data.
+ *
+ * @var string
+ */
+  protected $buffer = '';
 
 /**
  * Create the socket resource
@@ -51,11 +68,25 @@ class Socket {
 /**
  * Reads a maximum of length bytes from the socket
  * 
- * @param integer $bytes
+ * @param integer $length
  * @return string
  */
-  public function read($bytes) {
-    return socket_read($this->socket, $bytes);
+  public function read($length) {
+    $left = $length;
+    $data = '';
+
+    while ($left > 0) {
+      $toRead = min(self::READ_BUFFER_SIZE, $left);
+      $bytes = socket_read($this->socket, $toRead);
+      $data .= $bytes;
+      $left -= strlen($bytes);
+    }
+
+    if ($this->log) {
+      $this->buffer .= $data;
+    }
+
+    return $data;
   }
 
 /**
@@ -68,5 +99,27 @@ class Socket {
       $w = $e = array();
       $result = socket_select($r, $w, $e, 1);
       return $result === 1;
+  }
+
+/**
+ * Start logging data to the buffer. Logging is stopped when
+ * the buffer is retrieved with the buffer() method.
+ *
+ * @return void
+ */
+  public function log() {
+    $this->log = true;
+  }
+
+/**
+ * Stop logging and return the logged data from the buffer.
+ *
+ * @return string
+ */
+  public function buffer() {
+    $this->log = false;
+    $buffer = $this->buffer;
+    $this->buffer = '';
+    return $buffer;
   }
 }
