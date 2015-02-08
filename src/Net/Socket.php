@@ -2,6 +2,8 @@
 
 namespace Att\M2X\MQTT\Net;
 
+use Att\M2X\MQTT\Error\SocketException;
+
 class Socket {
 
 /**
@@ -27,9 +29,13 @@ class Socket {
  * @param string $host
  * @param integer $port
  * @return void
+ * @throws SocketException
  */
   public function connect($host, $port) {
-    socket_connect($this->socket, $host, $port);
+    if (!@socket_connect($this->socket, $host, $port)) {
+      $error = socket_strerror(socket_last_error());
+      throw new SocketException($error);
+    }
   }
 
 /**

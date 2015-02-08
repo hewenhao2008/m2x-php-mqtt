@@ -101,6 +101,7 @@ class MQTTClient extends \Att\M2X\M2X {
  *
  * @return void
  * @throws ProtocolException
+ * @throws SocketException
  */
   public function connect() {
     $this->socket()->create();

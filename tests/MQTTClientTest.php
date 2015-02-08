@@ -16,4 +16,17 @@ class MQTTClientTest extends BaseTestCase {
     $this->assertSame(2, $client->nextPacketId());
     $this->assertSame(3, $client->nextPacketId());
   }
+
+/**
+ * testConnetSocketException method
+ *
+ * @expectedException \Att\M2X\MQTT\Error\SocketException
+ * @expectedExceptionMessage Connection refused
+ *
+ * @return void
+ */
+  public function testConnectSocketException() {
+  	$client = new MQTTClient('0.0.0.0', 'foobar');
+  	$client->connect();
+  }
 }
