@@ -19,12 +19,7 @@ class PublishPacket extends Packet {
   protected $payload = '';
 
   public function __construct($options = array(), $flags = 0x00) {
-    foreach ($options as $name => $value) {
-      if (property_exists($this, $name)) {
-        $this->{$name} = $value;
-      }
-    }
-
+    $this->setOptions($options);
     parent::__construct(Packet::TYPE_PUBLISH, $flags);
   }
 

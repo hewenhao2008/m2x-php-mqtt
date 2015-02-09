@@ -11,14 +11,9 @@ class SubscribePacket extends Packet {
  */
   protected $topic = '';
 
-  public function __construct($options = array()) {
-    foreach ($options as $name => $value) {
-      if (property_exists($this, $name)) {
-        $this->{$name} = $value;
-      }
-    }
-
-    parent::__construct(Packet::TYPE_SUBSCRIBE);
+  public function __construct($options = array(), $flags = 0x00) {
+    $this->setOptions($options);
+    parent::__construct(Packet::TYPE_SUBSCRIBE, $flags);
   }
 
   protected function encodeBody() {

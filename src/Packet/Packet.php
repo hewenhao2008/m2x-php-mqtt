@@ -105,6 +105,20 @@ class Packet {
   }
 
 /**
+ * Set packet options
+ *
+ * @param array $options
+ * @return void
+ */
+  public function setOptions($options) {
+    foreach ($options as $name => $value) {
+      if (property_exists($this, $name)) {
+        $this->{$name} = $value;
+      }
+    }
+  }
+
+/**
  * Add a string to the buffer
  *
  * @todo Make this UTF-8

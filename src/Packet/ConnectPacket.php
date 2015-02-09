@@ -40,14 +40,9 @@ class ConnectPacket extends Packet {
  */
   protected $password = null;
 
-  public function __construct($options = array()) {
-    foreach ($options as $name => $value) {
-      if (property_exists($this, $name)) {
-        $this->{$name} = $value;
-      }
-    }
-
-    parent::__construct(Packet::TYPE_CONNECT);
+  public function __construct($options = array(), $flags = 0x00) {
+    $this->setOptions($options);
+    parent::__construct(Packet::TYPE_CONNECT, $flags);
   }
 
   public function encodeBody() {
