@@ -278,11 +278,7 @@ class MQTTClient extends \Att\M2X\M2X {
 
     $this->publish(sprintf('m2x/%s/requests', $this->apiKey), json_encode($payload));
 
-$this->socket()->log();
     $packet = $this->receivePacket();
-$fp = fopen('return' . $payload['id'] . '.hex', 'ab');
-fwrite($fp, $this->socket()->buffer());
-fclose($fp);
 
     $response = new MQTTResponse($packet->payload());
     return $this->handleResponse($response);
