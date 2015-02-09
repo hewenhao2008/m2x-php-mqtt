@@ -4,23 +4,72 @@ namespace Att\M2X\MQTT\Packet;
 
 class Packet {
 
+/**
+ * Packet class map
+ *
+ * @var array
+ */
   static $PACKET_TYPES = array(
-    1 => '\Att\M2X\MQTT\Packet\ConnectPacket',
-    2 => '\Att\M2X\MQTT\Packet\ConnackPacket',
-    3 => '\Att\M2X\MQTT\Packet\PublishPacket',
-    8 => '\Att\M2X\MQTT\Packet\SubscribePacket',
-    9 => '\Att\M2X\MQTT\Packet\SubackPacket'
+    1  => '\Att\M2X\MQTT\Packet\ConnectPacket',
+    2  => '\Att\M2X\MQTT\Packet\ConnackPacket',
+    3  => '\Att\M2X\MQTT\Packet\PublishPacket',
+    4  => '\Att\M2X\MQTT\Packet\PubackPacket',
+    5  => '\Att\M2X\MQTT\Packet\PubrecPacket',
+    6  => '\Att\M2X\MQTT\Packet\PubrelPacket',
+    7  => '\Att\M2X\MQTT\Packet\PubcompPacket',
+    8  => '\Att\M2X\MQTT\Packet\SubscribePacket',
+    9  => '\Att\M2X\MQTT\Packet\SubackPacket',
+    10 => '\Att\M2X\MQTT\Packet\UnsubscribePacket',
+    11 => '\Att\M2X\MQTT\Packet\UnsubackPacket',
+    12 => '\Att\M2X\MQTT\Packet\PingreqPacket',
+    13 => '\Att\M2X\MQTT\Packet\PingrespPacket',
+    14 => '\Att\M2X\MQTT\Packet\DisconnectPacket'
   );
 
+/**
+ * Protocol name
+ */
   const PROTOCOL_NAME = 'MQIsdp';
 
+/**
+ * Protocol version
+ */
   const PROTOCOL_VERSION = 0x03;
 
-  const TYPE_CONNECT = 0x10;
-  const TYPE_CONNACK = 0x20;
-  const TYPE_PUBLISH = 0x30;
-  const TYPE_SUBSCRIBE = 0x80;
-  const TYPE_SUBACK = 0x90;
+/**
+ * Packet types
+ */
+  const TYPE_CONNECT     = 0x10;
+  const TYPE_CONNACK     = 0x20;
+  const TYPE_PUBLISH     = 0x30;
+  const TYPE_PUBACK      = 0x40;
+  const TYPE_PUBREC      = 0x50;
+  const TYPE_PUBREL      = 0x60;
+  const TYPE_PUBCOMP     = 0x70;
+  const TYPE_SUBSCRIBE   = 0x80;
+  const TYPE_SUBACK      = 0x90;
+  const TYPE_UNSUBSCRIBE = 0xA0;
+  const TYPE_UNSUBACK    = 0xB0;
+  const TYPE_PINGREQ     = 0xC0;
+  const TYPE_PINGRESP    = 0xD0;
+  const TYPE_DISCONNECT  = 0xE0;
+
+/**
+ * Quality of service
+ */
+  const QOS0 = 0x00;
+  const QOS1 = 0x02;
+  const QOS2 = 0x04;
+
+/**
+ * Retain flag
+ */
+  const RETAIN = 0x01;
+
+/**
+ * Duplicate flag
+ */
+  const DUP = 0x08;
 
 /**
  * Holds the buffer to be sent to the broker
@@ -172,6 +221,15 @@ class Packet {
  */
   public function type() {
     return $this->type;
+  }
+
+/**
+ * Returns the packet flags
+ *
+ * @return integer
+ */
+  public function flags() {
+    return $this->flags;
   }
 
 /**

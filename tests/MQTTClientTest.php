@@ -1,6 +1,7 @@
 <?php
 
 use Att\M2X\MQTT\MQTTClient;
+use Att\M2X\MQTT\Packet\Packet;
 
 class MQTTClientTest extends BaseTestCase {
 
@@ -165,5 +166,34 @@ class MQTTClientTest extends BaseTestCase {
     $result = $client->socket();
     $this->assertInstanceOf('\Att\M2X\MQTT\Net\Socket', $result);
     $this->assertSame($result, $client->socket);
+  }
+
+/**
+ * testPublish method
+ *
+ * @return void
+ */
+  public function testPublish() {
+    $client = new MockMQTTClient('0.0.0.0', 'bar');
+    $client->socket = $this->getMockBuilder('Socket')
+                           ->setMethods(array('write'))
+                           ->getMock();
+
+    $expected = pack('C*', 
+      0x31, // Static Header (RETAIN flag set)
+      0x08, // Remaining Length
+      0x00, // MSB
+      0x03, // LSB
+      0x61, // a
+      0x2F, // /
+      0x62, // b
+      0x66, // f
+      0x6F, // o
+      0x6F  // o
+    );
+
+    $client->socket->expects($this->once())->method('write')->with($this->equalTo($expected));
+
+    $client->publish('a/b', 'foo', Packet::RETAIN);
   }
 }

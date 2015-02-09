@@ -17,16 +17,6 @@ class MQTTClient extends \Att\M2X\M2X {
   const VERSION = '2.0.0';
 
 /**
- * These flags indicates the level of assurance for delivery of a PUBLISH message.
- *
- */
-  const QOS0 = 0x00;
-  const QOS1 = 0x02;
-  const QOS2 = 0x04;
-  const RETAIN = 0x01;
-  const DUP = 0x08;
-
-/**
  * Hostname of the remote server
  *
  * @var string
@@ -81,7 +71,7 @@ class MQTTClient extends \Att\M2X\M2X {
  *
  * @var integer
  */
-  protected $qos = self::QOS0;
+  protected $qos = Packet::QOS0;
 
   public function __construct($host, $apiKey, $options = array()) {
     $this->host = $host;
@@ -130,7 +120,7 @@ class MQTTClient extends \Att\M2X\M2X {
     $packet = new PublishPacket(array(
       'topic' => $topic,
       'payload' => $payload
-    ));
+    ), $flags);
 
     $this->sendPacket($packet);
   }
@@ -276,7 +266,7 @@ class MQTTClient extends \Att\M2X\M2X {
       $payload['body'] = $vars;
     }
 
-    $this->publish(sprintf('m2x/%s/requests', $this->apiKey), json_encode($payload));
+    $this->publish(sprintf('m2x/%s/requests', $this->apiKey), json_encode($payload), Packet::RETAIN);
 
     $packet = $this->receivePacket();
 
