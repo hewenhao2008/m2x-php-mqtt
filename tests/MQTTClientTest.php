@@ -95,6 +95,66 @@ class MQTTClientTest extends BaseTestCase {
   }
 
 /**
+ * testPut method
+ *
+ * @return void
+ */
+  public function testPut() {
+  $client = $this->getMockClient('0.0.0.0', 'foobar', array(), array('nextRequestId', 'publish'));
+    $client->socket = $this->createTestSocket('api_update_location_success');
+
+    $client->expects($this->once())->method('nextRequestId')
+           ->willReturn('foobar');
+
+    $expectedPayload = array(
+      'id' => 'foobar',
+      'method' => 'PUT',
+      'resource' => '/v2/devices/5b21ef4cc18995597005da602a594ef5/location',
+      'body' => array(
+        'name' => 'Storage Room',
+        'latitude' => '-37.9788423562422',
+        'longitude' => '-57.5478776916862'
+      )
+    );
+
+    $client->expects($this->once())->method('publish')
+           ->with($this->equalTo('m2x/foobar/requests'), $this->equalTo(json_encode($expectedPayload)));
+
+    $device = new Att\M2X\Device($client, array('id' => '5b21ef4cc18995597005da602a594ef5'));
+    $data = array(
+      'name' => 'Storage Room',
+      'latitude' => '-37.9788423562422',
+      'longitude' => '-57.5478776916862'
+    );
+    $device->updateLocation($data);
+  }
+
+/**
+ * testDelete method
+ *
+ * @return void
+ */
+  public function testDelete() {
+  $client = $this->getMockClient('0.0.0.0', 'foobar', array(), array('nextRequestId', 'publish'));
+    $client->socket = $this->createTestSocket('api_device_delete_success');
+
+    $client->expects($this->once())->method('nextRequestId')
+           ->willReturn('123');
+
+    $expectedPayload = array(
+      'id' => '123',
+      'method' => 'DELETE',
+      'resource' => '/v2/devices/5b21ef4cc18995597005da602a594ef5'
+    );
+
+    $client->expects($this->once())->method('publish')
+           ->with($this->equalTo('m2x/foobar/requests'), $this->equalTo(json_encode($expectedPayload)));
+
+    $device = new Att\M2X\Device($client, array('id' => '5b21ef4cc18995597005da602a594ef5'));
+    $device->delete();
+  }
+
+/**
  * testSocket method
  *
  * @return void

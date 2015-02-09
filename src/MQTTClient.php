@@ -240,6 +240,27 @@ class MQTTClient extends \Att\M2X\M2X {
   }
 
 /**
+ * Perform an PUT request to the API.
+ *
+ * @param string $path
+ * @param array $vars
+ * @return MQTTResponse
+ */
+  public function put($path, $vars = array()) {
+    return $this->sendRequest('PUT', $path, $vars);
+  }
+
+/**
+ * Perform a DELETE request to the API.
+ *
+ * @param string $path
+ * @return MQTTResponse
+ */
+  public function delete($path) {
+    return $this->sendRequest('DELETE', $path);
+  }
+
+/**
  * Send a pseudo HTTP request to the M2X API
  *
  * @param string $method
@@ -253,13 +274,17 @@ class MQTTClient extends \Att\M2X\M2X {
       'resource' => '/v2' . $resource
     );
 
-    if ($method === 'POST') {
+    if ($method === 'POST' || $method === 'PUT') {
       $payload['body'] = $vars;
     }
 
     $this->publish(sprintf('m2x/%s/requests', $this->apiKey), json_encode($payload));
 
+$this->socket()->log();
     $packet = $this->receivePacket();
+$fp = fopen('return' . $payload['id'] . '.hex', 'ab');
+fwrite($fp, $this->socket()->buffer());
+fclose($fp);
 
     $response = new MQTTResponse($packet->payload());
     return $this->handleResponse($response);
