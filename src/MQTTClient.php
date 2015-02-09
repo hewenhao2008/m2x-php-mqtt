@@ -10,8 +10,6 @@ use Att\M2X\MQTT\Error\ProtocolException;
 use Att\M2X\MQTT\MQTTResponse;
 use Att\M2X\MQTT\Net\Socket;
 
-require_once 'Hexdump.php';
-
 mb_internal_encoding('UTF-8');
 
 class MQTTClient extends \Att\M2X\M2X {
