@@ -98,14 +98,34 @@ class Packet {
   protected function parseBody($data) {}
 
 /**
- * Encode a packet object and return the binary string
- * that can be sent to the socket.
+ * Encode a packet object and return the its binary string.
  *
  * @return string
  */
   public function encode() {
     $this->encodeBody();
-    $header = pack('C*', $this->type | $this->flags, strlen($this->buffer));
+
+    //Encode remaining length
+    $x = strlen($this->buffer);
+    $bytes = array();
+    while ($x > 0) {
+      $byte = $x % 128;
+      $x = $x >> 7;
+      if ($x > 0) {
+        $byte = $byte | 0x80;
+      }
+      $bytes[] = $byte;
+    }
+
+    if (empty($bytes)) {
+      $bytes[] = 0x00;
+    }
+
+    $header = pack('C', $this->type | $this->flags);
+    foreach ($bytes as $byte) {
+      $header .= pack('C', $byte);
+    }
+
     return $header . $this->buffer;
   }
 

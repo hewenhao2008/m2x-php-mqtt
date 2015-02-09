@@ -1,7 +1,12 @@
 <?php
 
 use Att\M2X\MQTT\Packet\Packet;
+use Att\M2X\MQTT\Packet\PublishPacket;
 use Att\M2X\MQTT\Test\FileStreamSocket;
+
+class MockPacket extends Packet {
+  public $buffer = '';
+}
 
 class PacketTest extends BaseTestCase {
 
@@ -11,12 +16,11 @@ class PacketTest extends BaseTestCase {
  * @return void
  */
   public function testEncodingFixedHeader() {
-    $packet = new Packet(Packet::TYPE_CONNECT, 0x07);
-
+    $packet = new MockPacket(Packet::TYPE_CONNECT, 0x07);
     $result = $packet->encode();
     $expected = pack('C*', 0x17, 0x00);
 
-    $this->assertSame($expected, $result);
+    $this->assertEquals($expected, $result);
   }
 
 /**
@@ -57,6 +61,30 @@ class PacketTest extends BaseTestCase {
     );
 
     $this->assertEquals($expected, $packet->encode());
+  }
+
+/**
+ * testEncodeLongData method
+ *
+ * @return void
+ */
+  public function testEncodeLongData() {
+    $packet = new MockPacket(Packet::TYPE_PUBLISH, 0x05);
+    $packet->buffer .= str_repeat('A', 300);
+
+    $expectedBytes = array_merge(
+      array(
+        0x35, // Static Header
+        0xAC, // Remaining Length (44)
+        0x02 // Remaining Length (2 * 128)
+      ),
+      array_fill(0, 300, 0x41)
+    );
+
+    $expected = call_user_func_array('pack',array_merge(array('C*'),$expectedBytes));
+    $result = $packet->encode();
+
+    $this->assertEquals($expected, $result);
   }
 
 /**
