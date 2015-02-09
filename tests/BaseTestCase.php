@@ -21,6 +21,14 @@ abstract class BaseTestCase extends PHPUnit_Framework_TestCase {
     $this->socket = null;
   }
 
+  protected function getMockClient($host, $apiKey, $options = array(), $methods = null) {
+    $client = $this->getMockBuilder('MockMQTTClient')
+                   ->setConstructorArgs(array($host, $apiKey, $options))
+                   ->setMethods($methods)
+                   ->getMock();
+    return $client;
+  }
+
 /**
  * Creates a new FileSocket and sets it up to use a test packet
  * from the test_packets directory.

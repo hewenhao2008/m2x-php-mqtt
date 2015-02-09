@@ -208,11 +208,20 @@ class MQTTClient extends \Att\M2X\M2X {
     return $this->lastPacketId;
   }
 
+/**
+ * Generate a request id for M2X requests
+ *
+ * @return string
+ */
+  protected function nextRequestId() {
+    return rand(1000, 9000);
+  }
+
   public function get($path, $params = array()) {
     $uri = '/v2' . $path;
 
     $payload = array(
-      'id' => rand(1000, 9000),
+      'id' => $this->nextRequestId(),
       'method' => 'GET',
       'resource' => $uri
     );

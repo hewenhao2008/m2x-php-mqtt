@@ -31,16 +31,40 @@ class MQTTClientTest extends BaseTestCase {
   }
 
 /**
- * testDevices method
+ * testGet method
  *
  * @return void
  */
-  public function testDevices() {
-    $client = new MockMQTTClient('0.0.0.0', 'foobar');
-    $socket = $this->createTestSocket('api_list_devices');
-    $client->socket = $socket;
+  public function testGet() {
+    $client = $this->getMockClient('0.0.0.0', 'foobar', array(), array('nextRequestId', 'publish'));
+    $client->socket = $this->createTestSocket('api_list_devices');
+
+    $client->expects($this->once())->method('nextRequestId')
+           ->willReturn('id-12345');
+
+    $expectedPayload = array(
+      'id' => 'id-12345',
+      'method' => 'GET',
+      'resource' => '/v2/devices'
+    );
+
+    $client->expects($this->once())->method('publish')
+           ->with($this->equalTo('m2x/foobar/requests'), $this->equalTo(json_encode($expectedPayload)));
 
     $result = $client->devices();
     $this->assertEquals(3, $result->count());
+  }
+
+/**
+ * testSocket method
+ *
+ * @return void
+ */
+  public function testSocket() {
+    $client = new MockMQTTClient('0.0.0.0', 'bar');
+    $this->assertNull($client->socket);
+    $result = $client->socket();
+    $this->assertInstanceOf('\Att\M2X\MQTT\Net\Socket', $result);
+    $this->assertSame($result, $client->socket);
   }
 }
