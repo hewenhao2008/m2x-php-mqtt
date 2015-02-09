@@ -217,14 +217,45 @@ class MQTTClient extends \Att\M2X\M2X {
     return rand(1000, 9000);
   }
 
+/**
+ * Perform a GET request to the API.
+ *
+ * @param string $path
+ * @param array $params
+ * @return MQTTResponse
+ */
   public function get($path, $params = array()) {
-    $uri = '/v2' . $path;
+    return $this->sendRequest('GET', $path);
+  }
 
+/**
+ * Perform a POST request to the API.
+ *
+ * @param string $path
+ * @param array $vars
+ * @return MQTTResponse
+ */
+  public function post($path, $vars = array()) {
+    return $this->sendRequest('POST', $path, $vars);
+  }
+
+/**
+ * Send a pseudo HTTP request to the M2X API
+ *
+ * @param string $method
+ * @param string $resource
+ * @return MQTTResponse
+ */
+  protected function sendRequest($method, $resource, $vars = array()) {
     $payload = array(
       'id' => $this->nextRequestId(),
-      'method' => 'GET',
-      'resource' => $uri
+      'method' => $method,
+      'resource' => '/v2' . $resource
     );
+
+    if ($method === 'POST') {
+      $payload['body'] = $vars;
+    }
 
     $this->publish(sprintf('m2x/%s/requests', $this->apiKey), json_encode($payload));
 

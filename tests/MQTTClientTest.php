@@ -56,6 +56,45 @@ class MQTTClientTest extends BaseTestCase {
   }
 
 /**
+ * testPost method
+ *
+ * @return void
+ */
+  public function testPost() {
+    $client = $this->getMockClient('0.0.0.0', 'foobar', array(), array('nextRequestId', 'publish'));
+    $client->socket = $this->createTestSocket('api_create_device_success');
+
+    $client->expects($this->once())->method('nextRequestId')
+           ->willReturn('554433');
+
+    $expectedPayload = array(
+      'id' => '554433',
+      'method' => 'POST',
+      'resource' => '/v2/devices',
+      'body' => array(
+        'name' => 'Foo Bar',
+        'description' => 'Lorem Ipsum',
+        'visibility' => 'private'
+      )
+    );
+
+    $client->expects($this->once())->method('publish')
+           ->with($this->equalTo('m2x/foobar/requests'), $this->equalTo(json_encode($expectedPayload)));
+
+    $data = array(
+      'name' => 'Foo Bar',
+      'description' => 'Lorem Ipsum',
+      'visibility' => 'private'
+    );
+    $device = $client->createDevice($data);
+    $this->assertInstanceOf('Att\M2X\Device', $device);
+    $this->assertEquals('Foo Bar', $device->name);
+
+    $response = $client->lastResponse();
+    $this->assertEquals(201, $response->statusCode);
+  }
+
+/**
  * testSocket method
  *
  * @return void
