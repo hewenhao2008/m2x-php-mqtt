@@ -11,8 +11,33 @@ Getting Started
 2. Create your first [Device](https://m2x.att.com/devices) and copy its _Device ID_.
 3. Review the [M2X API Documentation](https://m2x.att.com/developer/documentation/overview).
 
-## More...
+## Installation
 
+Simply add a dependency on attm2x/m2x-php-mqtt to your project's composer.json file if you use Composer to manage the dependencies of your project.
+
+```json
+{
+  "require": {
+    "attm2x/m2x-php-mqtt": "~2.0"
+  }
+}
+```
+
+## Usage
+
+This MQTT library extends from the [attm2x/m2x-php](https://github.com/attm2x/m2x-php) library. Please refer to that library for additional usage instructions and examples to communicate with the M2X API.
+
+```php
+use Att\M2X\MQTT\MQTTClient;
+
+$host = gethostbyname('staging-api.m2x.sl.attcompute.com');
+$apiKey = '<YOUR API KEY>';
+
+$client = new MQTTClient($host, $apiKey);
+$client->connect();
+
+$devices = $client->devices();
+```
 
 ## License
 
