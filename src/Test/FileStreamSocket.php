@@ -35,6 +35,6 @@ class FileStreamSocket extends Socket {
  * @return boolean
  */
   public function dataAvailable() {
-  	return true;
+    return true;
   }
 }

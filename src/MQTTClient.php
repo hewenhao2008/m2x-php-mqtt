@@ -102,9 +102,8 @@ class MQTTClient extends \Att\M2X\M2X {
     ));
 
     $this->sendPacket($packet);
-  	$this->receiveConnack();
+    $this->receiveConnack();
 
-    //TODO: Find a better place for this
     $this->subscribe(sprintf('m2x/%s/responses', $this->apiKey));
   }
 
@@ -213,7 +212,7 @@ class MQTTClient extends \Att\M2X\M2X {
  * @return MQTTResponse
  */
   public function get($path, $params = array()) {
-    return $this->sendRequest('GET', $path);
+    return $this->sendRequest('GET', $path, $params);
   }
 
 /**
@@ -256,6 +255,10 @@ class MQTTClient extends \Att\M2X\M2X {
  * @return MQTTResponse
  */
   protected function sendRequest($method, $resource, $vars = array()) {
+    if($method == 'GET' && !empty($vars)) {
+      $resource = $resource . "?" . http_build_query($vars); 
+    }
+
     $payload = array(
       'id' => $this->nextRequestId(),
       'method' => $method,

@@ -100,7 +100,7 @@ class Packet {
   protected $flags = 0x00;
 
   public function __construct($type, $flags = 0x00) {
-  	$this->type = $type;
+    $this->type = $type;
     $this->flags = $flags;
   }
 

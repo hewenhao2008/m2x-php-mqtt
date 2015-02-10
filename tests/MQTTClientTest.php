@@ -46,7 +46,7 @@ class MQTTClientTest extends BaseTestCase {
     $expectedPayload = array(
       'id' => 'id-12345',
       'method' => 'GET',
-      'resource' => '/v2/devices'
+      'resource' => '/v2/devices?page=1'
     );
 
     $client->expects($this->once())->method('publish')
