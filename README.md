@@ -1,3 +1,6 @@
+[![Latest Stable Version](https://poser.pugx.org/attm2x/m2x-php-mqtt/v/stable.svg)](https://packagist.org/packages/attm2x/m2x-php-mqtt)
+[![License](https://poser.pugx.org/attm2x/m2x-php-mqtt/license.svg)](https://packagist.org/packages/attm2x/m2x-php-mqtt)
+
 # AT&T's M2X PHP (MQTT) Client
 
 [AT&T M2X](http://m2x.att.com) is a cloud-based fully managed time-series data storage service for network connected machine-to-machine (M2M) devices and the Internet of Things (IoT). 
@@ -41,6 +44,18 @@ $devices = $client->devices();
 
 $client->disconnect();
 ```
+
+## Versioning
+
+This lib aims to adhere to [Semantic Versioning 2.0.0](http://semver.org/). As a summary, given a version number `MAJOR.MINOR.PATCH`:
+
+1. `MAJOR` will increment when backwards-incompatible changes are introduced to the client.
+2. `MINOR` will increment when backwards-compatible functionality is added.
+3. `PATCH` will increment with backwards-compatible bug fixes.
+
+Additional labels for pre-release and build metadata are available as extensions to the `MAJOR.MINOR.PATCH` format.
+
+**Note**: the client version does not necessarily reflect the version used in the AT&T M2X API.
 
 ## License
 
