@@ -110,4 +110,30 @@ class PacketTest extends BaseTestCase {
     $packet = new Packet(Packet::TYPE_CONNACK);
     $this->assertSame(Packet::TYPE_CONNACK, $packet->type());
   }
+
+/**
+ * testUtf8Encoding method
+ *
+ * @return void
+ */
+  public function testUtf8Encoding() {
+    $packet = new MockPacket(Packet::TYPE_PUBLISH);
+    $this->callMethod($packet, 'encodeString', array('α/β'));
+    $this->callMethod($packet, 'encodeString', array('馬'));
+
+    $expected = pack('C*', 
+      0x30, // Static Header
+      0x0C, // Remaining Length (13 bytes)
+      0x00, // MSB
+      0x05, // LSB
+      0xCE, 0xB1, // α
+      0x2F, // /
+      0xCE, 0xB2,  // β
+      0x00, // MSB
+      0x03, // LSB
+      0xE9, 0xA6, 0xAC // 馬 
+    );
+
+    $this->assertEquals($expected, $packet->encode());
+  }
 }
