@@ -30,13 +30,16 @@ This MQTT library extends from the [attm2x/m2x-php](https://github.com/attm2x/m2
 ```php
 use Att\M2X\MQTT\MQTTClient;
 
-$host = gethostbyname('staging-api.m2x.sl.attcompute.com');
+$host = gethostbyname('api-m2x.att.com');
 $apiKey = '<YOUR API KEY>';
 
 $client = new MQTTClient($host, $apiKey);
 $client->connect();
 
+// Retrieve a list of devices
 $devices = $client->devices();
+
+$client->disconnect();
 ```
 
 ## License
