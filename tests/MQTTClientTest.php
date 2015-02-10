@@ -6,6 +6,34 @@ use Att\M2X\MQTT\Packet\Packet;
 class MQTTClientTest extends BaseTestCase {
 
 /**
+ * testConfiguration method
+ *
+ * @return void
+ */
+  public function testConfiguration() {
+    $client = new MockMQTTClient('127.0.0.1', 'api-key');
+
+    $this->assertEquals('127.0.0.1', $client->getProtected('host'));
+    $this->assertEquals(1883, $client->getProtected('port'));
+    $this->assertEquals('api-key', $client->getProtected('apiKey'));
+
+    //Make sure a random client id gets generated
+    $this->assertNotEmpty($client->getProtected('clientId'));
+
+    //Make sure the client id is random
+    $firstClientId = $client->getProtected('clientId');
+    $client = new MockMQTTClient('127.0.0.1', 'api-key');
+    $secondClientId = $client->getProtected('clientId');
+    $this->assertNotEquals($firstClientId, $secondClientId);
+
+    //Test options
+    $options = array('clientId' => 'foo-client', 'port' => 5555);
+    $client = new MockMQTTClient('127.0.0.1', 'api-key', $options);
+    $this->assertEquals(5555, $client->getProtected('port'));
+    $this->assertEquals('foo-client', $client->getProtected('clientId'));
+  }
+
+/**
  * testNextPacketId method
  *
  * @return void
@@ -195,5 +223,27 @@ class MQTTClientTest extends BaseTestCase {
     $client->socket->expects($this->once())->method('write')->with($this->equalTo($expected));
 
     $client->publish('a/b', 'foo', Packet::RETAIN);
+  }
+
+/**
+ * testDisconnect method
+ *
+ * @return void
+ */
+  public function testDisconnect() {
+    $client = new MockMQTTClient('0.0.0.0', 'bar');
+    $client->socket = $this->getMockBuilder('Socket')
+                           ->setMethods(array('write', 'close'))
+                           ->getMock();
+
+    $expected = pack('C*', 
+      0xE0, // Static Header
+      0x00 // Remaining Length
+    );
+
+    $client->socket->expects($this->at(0))->method('write')->with($this->equalTo($expected));
+    $client->socket->expects($this->at(1))->method('close');
+
+    $client->disconnect();
   }
 }

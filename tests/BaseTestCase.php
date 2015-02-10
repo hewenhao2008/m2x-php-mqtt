@@ -7,6 +7,16 @@ use Att\M2X\MQTT\Test\FileStreamSocket;
 class MockMQTTClient extends MQTTClient {
 
   public $socket = null;
+
+/**
+ * Utility test method to retrieve protected properties
+ *
+ * @param string $name
+ * @return mixed
+ */
+  public function getProtected($name) {
+    return $this->{$name};
+  }
 }
 
 abstract class BaseTestCase extends PHPUnit_Framework_TestCase {

@@ -90,6 +90,15 @@ class Socket {
   }
 
 /**
+ * Closes the socket resource.
+ *
+ * @return void
+ */
+  public function close() {
+    socket_close($this->socket);
+  }
+
+/**
  * Listen on the socket until new data is available
  *
  * @return boolean

@@ -6,6 +6,7 @@ use Att\M2X\MQTT\Packet\Packet;
 use Att\M2X\MQTT\Packet\ConnectPacket;
 use Att\M2X\MQTT\Packet\PublishPacket;
 use Att\M2X\MQTT\Packet\SubscribePacket;
+use Att\M2X\MQTT\Packet\DisconnectPacket;
 use Att\M2X\MQTT\Error\ProtocolException;
 use Att\M2X\MQTT\MQTTResponse;
 use Att\M2X\MQTT\Net\Socket;
@@ -43,7 +44,7 @@ class MQTTClient extends \Att\M2X\M2X {
  *
  * @var string
  */
-  protected $clientId = null;
+  protected $clientId = '';
 
 /**
  * The username for authenticating with the server
@@ -76,6 +77,10 @@ class MQTTClient extends \Att\M2X\M2X {
   public function __construct($host, $apiKey, $options = array()) {
     $this->host = $host;
     $options['username'] = $this->apiKey = $apiKey;
+
+    if (!isset($options['clientId'])) {
+      $options['clientId'] = $this->generateClientId();
+    }
 
     foreach ($options as $name => $value) {
       if (property_exists($this, $name)) {
@@ -142,6 +147,17 @@ class MQTTClient extends \Att\M2X\M2X {
   }
 
 /**
+ * Send a DISCONNECT packet to the MQTT broker
+ *
+ * @return void
+ */
+  public function disconnect() {
+    $packet = new DisconnectPacket();
+    $this->sendPacket($packet);
+    $this->socket()->close();
+  }
+
+/**
  * Send a Packet object to the broker
  *
  * @param Packet $packet
@@ -202,6 +218,15 @@ class MQTTClient extends \Att\M2X\M2X {
  */
   protected function nextRequestId() {
     return rand(1000, 9000);
+  }
+
+/**
+ * Generate a random client id
+ *
+ * @return string
+ */
+  protected function generateClientId() {
+    return 'PHP-' . time() . '-' . substr(md5(rand()), 0, 7);
   }
 
 /**
