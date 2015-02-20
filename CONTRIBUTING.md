@@ -8,3 +8,6 @@ Try to use distinct and descriptive subject lines to make issues easier to ident
 # Creating a new library
 
 If you are creating a new client library, please adhere to the guidelines found here: https://github.com/attm2x/m2x-service/blob/master/CLIENT-CONTRIBUTIONS.md
+
+If you are creating a new MQTT based client library, please also consult the guidelines found here: 
+https://github.com/attm2x/m2x-service/blob/master/MQTT-CLIENT-CONTRIBUTIONS.md
