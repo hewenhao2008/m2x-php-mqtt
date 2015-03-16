@@ -8,12 +8,14 @@ use Att\M2X\MQTT\Packet\PublishPacket;
 use Att\M2X\MQTT\Packet\SubscribePacket;
 use Att\M2X\MQTT\Packet\DisconnectPacket;
 use Att\M2X\MQTT\Error\ProtocolException;
+use Att\M2X\MQTT\Error\M2XException;
 use Att\M2X\MQTT\MQTTResponse;
 use Att\M2X\MQTT\Net\Socket;
+use Att\M2X\MQTT\Device;
 
 mb_internal_encoding('UTF-8');
 
-class MQTTClient extends \Att\M2X\M2X {
+class MQTTClient {
 
   const VERSION = '2.0.0';
 
@@ -303,6 +305,24 @@ class MQTTClient extends \Att\M2X\M2X {
   }
 
 /**
+ * Checks the MQTTResponse for errors and throws an exception, if
+ * no errors are encountered, the MQTTResponse is returned.
+ *
+ * @param MQTTResponse $response
+ * @return HttpResponse
+ * @throws M2XException
+ */
+  protected function handleResponse(MQTTResponse $response) {
+    $this->lastResponse = $response;
+
+    if ($response->success()) {
+      return $response;
+    }
+
+    throw new M2XException($response);
+  }
+
+/**
  * Return the socket instance, create new one if needed
  *
  * @return Socket
@@ -312,5 +332,36 @@ class MQTTClient extends \Att\M2X\M2X {
       $this->socket = new Socket();
     }
     return $this->socket;
+  }
+
+
+/**
+ * Get an instance of a Device resource
+ *
+ * @param string $key
+ * @return Key
+ */
+  public function device($id) {
+    return new Device($this, array('id' => $id));
+  }
+
+/**
+ * Create a new device.
+ *
+ * @param $data
+ * @return Device
+ */
+  public function createDevice($data) {
+    return Device::create($this, $data);
+  }
+
+/**
+ * Get an instance of a Distribution resource
+ *
+ * @param string $id
+ * @return Key
+ */
+  public function distribution($id) {
+    return new Distribution($this, array('id' => $id));
   }
 }
