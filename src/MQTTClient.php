@@ -232,17 +232,6 @@ class MQTTClient {
   }
 
 /**
- * Perform a GET request to the API.
- *
- * @param string $path
- * @param array $params
- * @return MQTTResponse
- */
-  public function get($path, $params = array()) {
-    return $this->sendRequest('GET', $path, $params);
-  }
-
-/**
  * Perform a POST request to the API.
  *
  * @param string $path
@@ -262,16 +251,6 @@ class MQTTClient {
  */
   public function put($path, $vars = array()) {
     return $this->sendRequest('PUT', $path, $vars);
-  }
-
-/**
- * Perform a DELETE request to the API.
- *
- * @param string $path
- * @return MQTTResponse
- */
-  public function delete($path) {
-    return $this->sendRequest('DELETE', $path);
   }
 
 /**
