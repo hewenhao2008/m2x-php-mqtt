@@ -11,7 +11,10 @@ class MQTTClientTest extends BaseTestCase {
  * @return void
  */
   public function testConfiguration() {
-    $client = new MockMQTTClient('127.0.0.1', 'api-key');
+    $client = new MockMQTTClient('foo-bar');
+    $this->assertEquals(gethostbyname('api-m2x.att.com'), $client->getProtected('host'));
+
+    $client = new MockMQTTClient('api-key', array('host' => '127.0.0.1'));
 
     $this->assertEquals('127.0.0.1', $client->getProtected('host'));
     $this->assertEquals(1883, $client->getProtected('port'));
@@ -22,13 +25,13 @@ class MQTTClientTest extends BaseTestCase {
 
     //Make sure the client id is random
     $firstClientId = $client->getProtected('clientId');
-    $client = new MockMQTTClient('127.0.0.1', 'api-key');
+    $client = new MockMQTTClient('api-key', array('host' => '127.0.0.1'));
     $secondClientId = $client->getProtected('clientId');
     $this->assertNotEquals($firstClientId, $secondClientId);
 
     //Test options
     $options = array('clientId' => 'foo-client', 'port' => 5555);
-    $client = new MockMQTTClient('127.0.0.1', 'api-key', $options);
+    $client = new MockMQTTClient('api-key', $options);
     $this->assertEquals(5555, $client->getProtected('port'));
     $this->assertEquals('foo-client', $client->getProtected('clientId'));
   }
@@ -39,7 +42,7 @@ class MQTTClientTest extends BaseTestCase {
  * @return void
  */
   public function testNextPacketId() {
-    $client = new MQTTClient('127.0.0.1', 'foobar');
+    $client = new MQTTClient('foobar', array('host' => '127.0.0.1'));
 
     $this->assertSame(1, $client->nextPacketId());
     $this->assertSame(2, $client->nextPacketId());
@@ -55,7 +58,7 @@ class MQTTClientTest extends BaseTestCase {
  * @return void
  */
   public function testConnectSocketException() {
-    $client = new MQTTClient('0.0.0.0', 'foobar');
+    $client = new MQTTClient('foobar', array('host' => '0.0.0.0'));
     $client->connect();
   }
 
@@ -136,7 +139,7 @@ class MQTTClientTest extends BaseTestCase {
  * @return void
  */
   public function testSocket() {
-    $client = new MockMQTTClient('0.0.0.0', 'bar');
+    $client = new MockMQTTClient('bar', array('host' => '0.0.0.0'));
     $this->assertNull($client->socket);
     $result = $client->socket();
     $this->assertInstanceOf('\Att\M2X\MQTT\Net\Socket', $result);
@@ -149,7 +152,7 @@ class MQTTClientTest extends BaseTestCase {
  * @return void
  */
   public function testPublish() {
-    $client = new MockMQTTClient('0.0.0.0', 'bar');
+    $client = new MockMQTTClient('bar', array('host' => '0.0.0.0'));
     $client->socket = $this->getMockBuilder('Socket')
                            ->setMethods(array('write'))
                            ->getMock();
@@ -178,7 +181,7 @@ class MQTTClientTest extends BaseTestCase {
  * @return void
  */
   public function testDisconnect() {
-    $client = new MockMQTTClient('0.0.0.0', 'bar');
+    $client = new MockMQTTClient('bar', array('host' => '0.0.0.0'));
     $client->socket = $this->getMockBuilder('Socket')
                            ->setMethods(array('write', 'close'))
                            ->getMock();

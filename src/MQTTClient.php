@@ -76,8 +76,23 @@ class MQTTClient {
  */
   protected $qos = Packet::QOS0;
 
-  public function __construct($host, $apiKey, $options = array()) {
-    $this->host = $host;
+/**
+ * Create a new instance of the MQTT Client, by default the client
+ * will connect to the live API of m2x and sets a random clientId.
+ *
+ * Optional options:
+ * - host: IP address of the MQTT broker
+ * - port: Port for the MQTT broker connection
+ * - clientId: The name of the Client ID to send to the broker
+ *
+ * @param string $apiKey
+ * @param array $options
+ */
+  public function __construct($apiKey, $options = array()) {
+    if (!isset($options['host'])) {
+      $options['host'] = gethostbyname('api-m2x.att.com');
+    }
+
     $options['username'] = $this->apiKey = $apiKey;
 
     if (!isset($options['clientId'])) {

@@ -32,8 +32,9 @@ abstract class BaseTestCase extends PHPUnit_Framework_TestCase {
   }
 
   protected function getMockClient($host, $apiKey, $options = array(), $methods = null) {
+    $options['host'] = $host;
     $client = $this->getMockBuilder('MockMQTTClient')
-                   ->setConstructorArgs(array($host, $apiKey, $options))
+                   ->setConstructorArgs(array($apiKey, $options))
                    ->setMethods($methods)
                    ->getMock();
     return $client;
