@@ -60,31 +60,6 @@ class MQTTClientTest extends BaseTestCase {
   }
 
 /**
- * testGet method
- *
- * @return void
- */
-  public function testGet() {
-    $client = $this->getMockClient('0.0.0.0', 'foobar', array(), array('nextRequestId', 'publish'));
-    $client->socket = $this->createTestSocket('api_list_devices');
-
-    $client->expects($this->once())->method('nextRequestId')
-           ->willReturn('id-12345');
-
-    $expectedPayload = array(
-      'id' => 'id-12345',
-      'method' => 'GET',
-      'resource' => '/v2/devices?page=1'
-    );
-
-    $client->expects($this->once())->method('publish')
-           ->with($this->equalTo('m2x/foobar/requests'), $this->equalTo(json_encode($expectedPayload)));
-
-    $result = $client->devices();
-    $this->assertEquals(3, $result->count());
-  }
-
-/**
  * testPost method
  *
  * @return void
@@ -116,11 +91,8 @@ class MQTTClientTest extends BaseTestCase {
       'visibility' => 'private'
     );
     $device = $client->createDevice($data);
-    $this->assertInstanceOf('Att\M2X\Device', $device);
+    $this->assertInstanceOf('Att\M2X\MQTT\Device', $device);
     $this->assertEquals('Foo Bar', $device->name);
-
-    $response = $client->lastResponse();
-    $this->assertEquals(201, $response->statusCode);
   }
 
 /**
@@ -149,38 +121,13 @@ class MQTTClientTest extends BaseTestCase {
     $client->expects($this->once())->method('publish')
            ->with($this->equalTo('m2x/foobar/requests'), $this->equalTo(json_encode($expectedPayload)));
 
-    $device = new Att\M2X\Device($client, array('id' => '5b21ef4cc18995597005da602a594ef5'));
+    $device = new Att\M2X\MQTT\Device($client, array('id' => '5b21ef4cc18995597005da602a594ef5'));
     $data = array(
       'name' => 'Storage Room',
       'latitude' => '-37.9788423562422',
       'longitude' => '-57.5478776916862'
     );
     $device->updateLocation($data);
-  }
-
-/**
- * testDelete method
- *
- * @return void
- */
-  public function testDelete() {
-  $client = $this->getMockClient('0.0.0.0', 'foobar', array(), array('nextRequestId', 'publish'));
-    $client->socket = $this->createTestSocket('api_device_delete_success');
-
-    $client->expects($this->once())->method('nextRequestId')
-           ->willReturn('123');
-
-    $expectedPayload = array(
-      'id' => '123',
-      'method' => 'DELETE',
-      'resource' => '/v2/devices/5b21ef4cc18995597005da602a594ef5'
-    );
-
-    $client->expects($this->once())->method('publish')
-           ->with($this->equalTo('m2x/foobar/requests'), $this->equalTo(json_encode($expectedPayload)));
-
-    $device = new Att\M2X\Device($client, array('id' => '5b21ef4cc18995597005da602a594ef5'));
-    $device->delete();
   }
 
 /**
