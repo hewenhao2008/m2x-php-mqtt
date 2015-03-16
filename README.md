@@ -28,22 +28,66 @@ Simply add a dependency on attm2x/m2x-php-mqtt to your project's composer.json f
 
 ## Usage
 
-This MQTT library extends from the [attm2x/m2x-php](https://github.com/attm2x/m2x-php) library. Please refer to that library for additional usage instructions and examples to communicate with the M2X API.
+In order to communicate with the M2X API, you need an instance of [MQTTClient](src//MQTTClient.php). You need to pass the host and your API key in the constructor to access your data.
 
 ```php
 use Att\M2X\MQTT\MQTTClient;
 
-$host = gethostbyname('api-m2x.att.com');
-$apiKey = '<YOUR API KEY>';
-
-$client = new MQTTClient($host, $apiKey);
+$client = new MQTTClient('<YOUR API KEY>');
 $client->connect();
 
-// Retrieve a list of devices
-$devices = $client->devices();
+// Placeholder for next examples.
 
 $client->disconnect();
 ```
+
+This provides an interface to the following endpoints for the M2X API:
+
+- Creating devices
+  ```php
+  $data = array(
+  	'name' => '<DEVICE-NAME>',
+  	'visibility' => 'private'
+  );
+  $device = $client->createDevice($data)
+  
+  //Or for a distribution
+  $distribution = $client->distribution("<DISTRIBUTION-ID>");
+  $distribution->addDevice('<SERIAL-NUMBER');
+  ```
+
+- Stream creation
+  ```php
+  $client->device('<DEVICE-ID')->updateStream('<STREAM-NAME>');
+  ```
+
+- Posting values
+  ```php
+  $device = $client->device('<DEVICE-ID>');
+
+  $device->stream('<STREAM-NAME')->updateValue($value);
+
+  $data = array(
+    array('value' => '1005', 'timestamp' => '2015-03-01T10:00:00Z'),
+    array('value' => '2002', 'timestamp' => '2015-03-05T10:00:00Z')
+
+  );
+  $device->postUpdates($data);
+  ```
+ 
+- Updating the device locations
+  ```php
+  $device = $client->device('<DEVICE-ID>');
+
+  $data = array(
+    'name' => 'Storage Room A',
+    'latitude' => '-37.9788423562422',
+    'longitude', '-57.5478776916862'
+  );
+  $device->updateLocation($data);
+  ```
+
+Refer to the documentation on each class for further usage instructions.
 
 ## Versioning
 
