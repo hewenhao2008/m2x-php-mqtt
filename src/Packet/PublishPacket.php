@@ -23,11 +23,22 @@ class PublishPacket extends Packet {
     parent::__construct(Packet::TYPE_PUBLISH, $flags);
   }
 
+/**
+ * Encoded the packet properties into the buffer.
+ *
+ * @return void
+ */
   public function encodeBody() {
     $this->encodeString($this->topic);
     $this->buffer .= $this->payload;
   }
 
+/**
+ * Parses the body and sets the properties of the Packet object.
+ *
+ * @param string $data
+ * @return void
+ */
   public function parseBody($data) {
     $bounds = unpack('C2', $data);
     $this->topic = mb_substr($data, 2, $bounds[2]);

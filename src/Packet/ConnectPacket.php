@@ -45,6 +45,11 @@ class ConnectPacket extends Packet {
     parent::__construct(Packet::TYPE_CONNECT, $flags);
   }
 
+/**
+ * Encoded the packet properties into the buffer.
+ *
+ * @return void
+ */
   public function encodeBody() {
     $this->encodeString(self::PROTOCOL_NAME);
     $this->buffer .= pack('C', self::PROTOCOL_VERSION);

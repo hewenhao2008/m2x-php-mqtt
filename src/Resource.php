@@ -42,7 +42,7 @@ abstract class Resource {
 /**
  * Creates a new resource
  *
- * @param M2X $client
+ * @param MQTTClient $client
  * @param array $data
  * @return Resource
  */
@@ -58,7 +58,7 @@ abstract class Resource {
 /**
  * Create object from API data
  *
- * @param M2X $client
+ * @param MQTTClient $client
  * @param stdClass $data
  */
   public function __construct($client, $data) {

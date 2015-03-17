@@ -16,6 +16,11 @@ class SubscribePacket extends Packet {
     parent::__construct(Packet::TYPE_SUBSCRIBE, $flags);
   }
 
+/**
+ * Encoded the packet properties into the buffer.
+ *
+ * @return void
+ */
   protected function encodeBody() {
     //Packet identifier
     $this->buffer .= pack('C*', 0x00, $this->id);

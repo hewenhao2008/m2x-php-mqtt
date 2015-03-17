@@ -32,7 +32,7 @@ class Stream extends Resource {
 /**
  * Disable the original POST factory
  *
- * @param M2X $client
+ * @param MQTTClient $client
  * @param string $id
  * @return void
  */

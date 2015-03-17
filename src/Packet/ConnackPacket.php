@@ -29,6 +29,12 @@ class ConnackPacket extends Packet {
     parent::__construct(Packet::TYPE_CONNACK);
   }
 
+/**
+ * Parses the body and sets the properties of the Packet object.
+ *
+ * @param string $data
+ * @return void
+ */
   public function parseBody($data) {
     $body = unpack('C*', $data);
     $this->returnCode = $body[2];
