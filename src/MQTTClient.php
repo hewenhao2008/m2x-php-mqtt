@@ -17,7 +17,17 @@ mb_internal_encoding('UTF-8');
 
 class MQTTClient {
 
+/**
+ * Version number of this library
+ *
+ */
   const VERSION = '2.0.0';
+
+/**
+ * The hostname of the default broker
+ *
+ */
+  const DEFAULT_API_HOST = 'api-m2x.att.com';
 
 /**
  * Hostname of the remote server
@@ -90,7 +100,7 @@ class MQTTClient {
  */
   public function __construct($apiKey, $options = array()) {
     if (!isset($options['host'])) {
-      $options['host'] = gethostbyname('api-m2x.att.com');
+      $options['host'] = gethostbyname(self::DEFAULT_API_HOST);
     }
 
     $options['username'] = $this->apiKey = $apiKey;
