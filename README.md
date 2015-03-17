@@ -114,6 +114,7 @@ function loadAvg() {
 }
 
 $m2x = new MQTTClient($apiKey);
+$m2x->connect();
 
 # Get the device
 $device = $m2x->device($deviceId);
