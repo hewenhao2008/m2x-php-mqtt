@@ -106,13 +106,6 @@ use Att\M2X\MQTT\Error\M2XException;
 $apiKey = getenv("API_KEY");
 $deviceId  = getenv("DEVICE");
 
-function loadAvg() {
-  $pattern = '/(\d+\.\d+),? (\d+\.\d+),? (\d+\.\d+)$/';
-  preg_match($pattern, shell_exec('uptime'), $matches);
-  array_shift($matches);
-  return $matches;
-}
-
 $m2x = new MQTTClient($apiKey);
 $m2x->connect();
 
@@ -125,7 +118,7 @@ $device->updateStream('load_5m');
 $device->updateStream('load_15m');
 
 while (true) {
-  list($load_1m, $load_5m, $load_15m) = loadAvg();
+  list($load_1m, $load_5m, $load_15m) = sys_getloadavg();
   $now = date('c');
 
   $values = array(
@@ -142,7 +135,7 @@ while (true) {
     break;
   }
 
-  sleep(1);
+  sleep(10);
 }
 ```
 
