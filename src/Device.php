@@ -17,7 +17,7 @@ class Device extends Resource {
  * @var array
  */
   protected static $properties = array(
-    'name', 'description', 'visibility', 'groups'
+    'name', 'description', 'visibility', 'tags'
   );
 
 /**
