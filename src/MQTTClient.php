@@ -21,7 +21,7 @@ class MQTTClient {
  * Version number of this library
  *
  */
-  const VERSION = '2.0.0';
+  const VERSION = '3.0.0';
 
 /**
  * The hostname of the default broker
