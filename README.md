@@ -1,4 +1,5 @@
 [![Latest Stable Version](https://poser.pugx.org/attm2x/m2x-php-mqtt/v/stable.svg)](https://packagist.org/packages/attm2x/m2x-php-mqtt)
+[![Build Status](https://img.shields.io/travis/attm2x/m2x-php-mqtt/master.svg?style=flat-square)](https://travis-ci.org/attm2x/m2x-php-mqtt)
 [![License](https://poser.pugx.org/attm2x/m2x-php-mqtt/license.svg)](https://packagist.org/packages/attm2x/m2x-php-mqtt)
 
 # AT&T's M2X PHP (MQTT) Client
