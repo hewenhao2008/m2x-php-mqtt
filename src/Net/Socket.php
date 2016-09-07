@@ -106,7 +106,7 @@ class Socket {
   public function dataAvailable() {
       $r = array($this->socket);
       $w = $e = array();
-      $result = socket_select($r, $w, $e, 1);
+      $result = socket_select($r, $w, $e, null);
       return $result === 1;
   }
 

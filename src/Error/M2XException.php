@@ -19,10 +19,8 @@ class M2XException extends \Exception {
  * @param HttpResponse $response
  */
   public function __construct(MQTTResponse $response) {
-  	var_dump($response);
     $data = $response->json();
-    var_dump($data);
     $this->response = $response;
-    parent::__construct($data['message'], $response->statusCode);
+    parent::__construct(current($data), $response->statusCode);
   }
 }

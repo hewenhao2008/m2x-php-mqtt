@@ -85,6 +85,12 @@ class Packet {
  */
   protected $type = null;
 
+/** The topic for received messages
+ *
+ * @var string
+ */
+ protected $topic = null;
+
 /**
  * Identifier to link control packets together
  *
