@@ -2,6 +2,8 @@
 
 namespace Att\M2X\MQTT;
 
+use Att\M2X\MQTT\Command;
+
 class Device extends Resource {
 
 /**
@@ -83,7 +85,7 @@ class Device extends Resource {
  *     array('timestamp' => <Time in ISO8601>, 'value' => g)
  *   )
  * )
- * 
+ *
  * @link https://m2x.att.com/developer/documentation/v2/device#Post-Device-Updates--Multiple-Values-to-Multiple-Streams
  *
  * @param array $values
@@ -92,5 +94,30 @@ class Device extends Resource {
   public function postUpdates($values) {
     $data = array('values' => $values);
     $response = $this->client->post($this->path() . '/updates', $data);
+  }
+
+/**
+ * Retrieve a list of commamds for this devie.
+ *
+ * @link https://m2x.att.com/developer/documentation/v2/commands#Device-s-List-of-Received-Commands
+ *
+ * @param array $params
+ * @return CommandsCollection
+ */
+  public function commands($params = array()) {
+    return new CommandCollection($this->client, $this, $params);
+  }
+
+  /**
+   * Wait for a new command, this method will block until a packet is received.
+   *
+   * @link https://m2x.att.com/developer/documentation/v2/mqtt#Commands-API
+   *
+   * @return Command
+   */
+  public function receiveCommand() {
+    $packet = $this->client->receivePacket($this->commandsTopic);
+    $data = json_decode($packet->payload(), true);
+    return new Command($this->client, $this, $data);
   }
 }

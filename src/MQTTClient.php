@@ -21,7 +21,7 @@ class MQTTClient {
  * Version number of this library
  *
  */
-  const VERSION = '3.0.0';
+  const VERSION = '3.1.0';
 
 /**
  * The hostname of the default broker
@@ -87,6 +87,27 @@ class MQTTClient {
   protected $qos = Packet::QOS0;
 
 /**
+ * The topic for the responses
+ *
+ * @var string
+ */
+  protected $responsesTopic = null;
+
+/**
+ * The topic for the commands
+ *
+ * @var string
+ */
+  protected $commandsTopic = null;
+
+/**
+ * Contains received packets
+ *
+ * @var array
+ */
+  protected $inbox = array();
+
+/**
  * Create a new instance of the MQTT Client, by default the client
  * will connect to the live API of m2x and sets a random clientId.
  *
@@ -99,6 +120,9 @@ class MQTTClient {
  * @param array $options
  */
   public function __construct($apiKey, $options = array()) {
+    $this->responsesTopic = sprintf('m2x/%s/responses', $apiKey);
+    $this->commandsTopic = sprintf('m2x/%s/commands', $apiKey);
+
     if (!isset($options['host'])) {
       $options['host'] = gethostbyname(self::DEFAULT_API_HOST);
     }
@@ -136,7 +160,8 @@ class MQTTClient {
     $this->sendPacket($packet);
     $this->receiveConnack();
 
-    $this->subscribe(sprintf('m2x/%s/responses', $this->apiKey));
+    $this->subscribe($this->responsesTopic);
+    $this->subscribe($this->commandsTopic);
   }
 
 /**
@@ -216,14 +241,26 @@ class MQTTClient {
 /**
  * Listen on the socket and receive a single packet.
  *
+ * @param $topic Only return packets from this topic (optional)
  * @return Packet
  */
-  protected function receivePacket() {
+  public function receivePacket($topic = null) {
     $socket = $this->socket();
 
     while(true) {
+      if ($topic && !empty($this->inbox[$topic])) {
+        return array_shift($this->inbox[$topic]);
+      }
+
       if ($socket->dataAvailable()) {
-        return Packet::read($socket);
+        $packet = Packet::read($socket);
+
+        if ($topic && $packet->topic() != $topic) {
+          $this->inbox[$packet->topic()] = $packet;
+          continue;
+        }
+
+        return $packet;
       }
     }
   }
@@ -256,6 +293,17 @@ class MQTTClient {
     return 'PHP-' . time() . '-' . substr(md5(rand()), 0, 7);
   }
 
+  /**
+   * Perform a GET request to the API.
+   *
+   * @param string $path
+   * @param array $params
+   * @return MQTTResponse
+   */
+    public function get($path, $params = array()) {
+      return $this->sendRequest('GET', $path, $params);
+    }
+
 /**
  * Perform a POST request to the API.
  *
@@ -287,7 +335,7 @@ class MQTTClient {
  */
   protected function sendRequest($method, $resource, $vars = array()) {
     if($method == 'GET' && !empty($vars)) {
-      $resource = $resource . "?" . http_build_query($vars); 
+      $resource = $resource . "?" . http_build_query($vars);
     }
 
     $payload = array(
