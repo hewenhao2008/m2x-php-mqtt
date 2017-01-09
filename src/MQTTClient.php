@@ -408,6 +408,19 @@ class MQTTClient {
   }
 
 /**
+  * Retrieve the list of devices accessible by the authenticated API key that
+  * meet the search criteria.
+  *
+  * @link https://m2x.att.com/developer/documentation/v2/device#Search-Devices
+  *
+  * @param $data
+  * @return Devices
+  */
+  public function searchDevices($data) {
+    return $this->post('/devices/search', $data);
+  }
+
+/**
  * Get an instance of a Distribution resource
  *
  * @param string $id
