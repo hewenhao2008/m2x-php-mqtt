@@ -1,6 +1,6 @@
 <?php
 
-include 'vendor/autoload.php';
+include '../vendor/autoload.php';
 
 use Att\M2X\MQTT\MQTTClient;
 
@@ -49,7 +49,10 @@ class Constants {
 }
 
 function process_command($command) {
-  print sprintf("Processing command %s (name=%s)\n\r", $command->id, $command->name);
+  echo sprintf("Processing command %s (name=%s)\n\r", $command->id, $command->name);
+  $response = $command->viewDeviceCommandDetails();
+  echo "Command Details :\r\n";
+  echo $response->raw();
 
   $name = strtoupper($command->name);
 
@@ -65,7 +68,7 @@ function process_command($command) {
 
 function process_say_command($command) {
   if (!empty($command->data['message'])) {
-    print sprintf("SAY: %s\n\r", $command->data['message']);
+    echo sprintf("SAY: %s\n\r", $command->data['message']);
     $command->process();
   } else {
     $reason = 'The "message" param is required in data';
@@ -77,7 +80,7 @@ function process_report_command($command) {
   $public_ip = getHostByName(php_uname('n'));
   $pid = (string) getmypid();
 
-  print sprintf("REPORT: public_ip: %s, pid: %s\n\r", $public_ip, $pid);
+  echo sprintf("REPORT: public_ip: %s, pid: %s\n\r", $public_ip, $pid);
   $command->process(compact('public_ip', 'pid'));
 }
 

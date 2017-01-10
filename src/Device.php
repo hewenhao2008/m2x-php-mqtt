@@ -45,6 +45,18 @@ class Device extends Resource {
   }
 
 /**
+ * Update the current location of the specified device.
+ *
+ * @link https://m2x.att.com/developer/documentation/v2/device#Post-Device-Update--Single-Values-to-Multiple-Streams-
+ *
+ * @param array $data
+ * @return MQTTResponse
+ */
+  public function postSingleValueToMultipleStreams($data) {
+    return $this->client->post(self::$path . '/' . $this->id . '/update', $data);
+  }
+
+/**
  * Get details of a specific data Stream associated with the device
  *
  * @link https://m2x.att.com/developer/documentation/v2/device#View-Data-Stream
@@ -105,16 +117,16 @@ class Device extends Resource {
  * @return CommandsCollection
  */
   public function commands($params = array()) {
-    return new CommandCollection($this->client, $this, $params);
+    return new CommandCollection($this->client, $params, $this);
   }
 
-  /**
-   * Wait for a new command, this method will block until a packet is received.
-   *
-   * @link https://m2x.att.com/developer/documentation/v2/mqtt#Commands-API
-   *
-   * @return Command
-   */
+/**
+ * Wait for a new command, this method will block until a packet is received.
+ *
+ * @link https://m2x.att.com/developer/documentation/v2/mqtt#Commands-API
+ *
+ * @return Command
+ */
   public function receiveCommand() {
     $packet = $this->client->receivePacket($this->commandsTopic);
     $data = json_decode($packet->payload(), true);
