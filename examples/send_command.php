@@ -20,17 +20,17 @@ try {
 
   //Check for unacknowledged commands
   $response = $m2x->sendCommand(array(
-     'name' => 'SAY',
-     'targets' => array(
-         'devices' => [$deviceId]
+    'name' => 'SAY',
+    'targets' => array(
+      'devices' => [$deviceId]
      )
  ));
-  echo "Status code $response->statusCode\n";
+  echo "Status code $response->statusCode\n\r";
 
   if ($response->statusCode == 202) {
-    echo "Send Command is Successful.\n";
+    echo "Send Command is Successful.\n\r";
   } else {
-    echo "Send Command Failed. Please Try Again.\n";
+    echo "Send Command Failed. Please Try Again.\n\r";
   }
   $m2x->disconnect();
 } catch (Exception $ex) {

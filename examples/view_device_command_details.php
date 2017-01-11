@@ -12,7 +12,7 @@ function get_command_details($command) {
   echo sprintf("CommandId = %s , CommandName = %s and ", $command->id, $command->name);
   $response = $command->details();
   echo "Command Details :";
-  echo $response->raw()."\n";
+  echo $response->raw()."\n\r";
 }
 
 try {
