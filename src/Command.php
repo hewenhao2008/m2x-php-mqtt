@@ -14,12 +14,12 @@ class Command extends Resource {
  */
   public static $path = ':parent_path/commands';
 
-  /**
-   * The parent resource that this stream belongs to
-   *
-   * @var Resource
-   */
-    public $parent = null;
+/**
+ * The parent resource that this stream belongs to
+ *
+ * @var Resource
+ */
+  public $parent = null;
 
 /**
  * The Device resource properties
@@ -33,12 +33,14 @@ class Command extends Resource {
 /**
  * Create object from API data
  *
- * @param M2X $client
- * @param Resource $parent
+ * @param MQTTClient $client
  * @param stdClass $data
+ * @param Resource $parent
  */
-  public function __construct(MQTTClient $client, Resource $parent, $data) {
-    $this->parent = $parent;
+  public function __construct(MQTTClient $client, $data = array(), Resource $parent = null) {
+    if (isset($parent)) {
+      $this->parent = $parent;
+    }
     parent::__construct($client, $data);
   }
 
@@ -60,6 +62,10 @@ class Command extends Resource {
     return $this->id;
   }
 
+/**
+ * Refresh the Command Info
+ *
+ */
   public function refresh() {
     $response = $this->client->get($this->path());
     $this->setData($response->json());
@@ -89,4 +95,27 @@ class Command extends Resource {
     return $this->client->post($this->path() . '/process', $data);
   }
 
+/**
+ * View Command Details
+ *
+ * @link https://m2x.att.com/developer/documentation/v2/commands#View-Command-Details
+ *
+ * @param array $data
+ * @return MQTTResponse
+ */
+  public function details($data = null) {
+    return $this->client->get('/commands' . '/' . $this->id , $data);
+  }
+
+/**
+ * View Device Command Details
+ *
+ * @link https://m2x.att.com/developer/documentation/v2/commands#Device-s-View-of-Command-Details
+ *
+ * @param array $data
+ * @return MQTTResponse
+ */
+  public function viewDeviceCommandDetails($data = null) {
+    return $this->client->get($this->path() , $data);
+  }
 }

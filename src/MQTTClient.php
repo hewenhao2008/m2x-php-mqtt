@@ -293,16 +293,16 @@ class MQTTClient {
     return 'PHP-' . time() . '-' . substr(md5(rand()), 0, 7);
   }
 
-  /**
-   * Perform a GET request to the API.
-   *
-   * @param string $path
-   * @param array $params
-   * @return MQTTResponse
-   */
-    public function get($path, $params = array()) {
-      return $this->sendRequest('GET', $path, $params);
-    }
+/**
+ * Perform a GET request to the API.
+ *
+ * @param string $path
+ * @param array $params
+ * @return MQTTResponse
+ */
+  public function get($path, $params = array()) {
+    return $this->sendRequest('GET', $path, $params);
+  }
 
 /**
  * Perform a POST request to the API.
@@ -428,5 +428,29 @@ class MQTTClient {
  */
   public function distribution($id) {
     return new Distribution($this, array('id' => $id));
+  }
+
+/**
+ * Retrieve a list of commands associated with the user account.
+ *
+ * @link https://m2x.att.com/developer/documentation/v2/commands#List-Sent-Commands
+ *
+ * @param array $params
+ * @return CommandCollection
+ */
+  public function commands($params = array()) {
+    return new CommandCollection($this, $params);
+  }
+
+/**
+ * Send a command to target devices.
+ *
+ * @link https://m2x.att.com/developer/documentation/v2/commands#Send-Command
+ *
+ * @param array $params
+ * @return MQTTResponse
+ */
+  public function sendCommand($params = array()) {
+    return $this->post('/commands', $params);
   }
 }
