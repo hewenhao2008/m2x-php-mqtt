@@ -5,6 +5,9 @@ namespace Att\M2X\MQTT;
 use Att\M2X\MQTT\MQTTClient;
 use Att\M2X\MQTT\Device;
 
+/**
+ * Wrapper for {@link https://m2x.att.com/developer/documentation/v2/commands M2X Commands} API
+ */
 class Command extends Resource {
 
 /**
@@ -45,9 +48,9 @@ class Command extends Resource {
   }
 
 /**
- * Returns the path to the resource
+ * Returns the path to the command
  *
- * @return string
+ * @return string path of the corresponding command
  */
   public function path() {
     return str_replace(':parent_path', $this->parent->path(), self::$path) . '/' . $this->id();
@@ -56,7 +59,7 @@ class Command extends Resource {
 /**
  * The resource id for the REST URL
  *
- * @return string
+ * @return string Command ID
  */
   public function id() {
     return $this->id;
@@ -72,48 +75,40 @@ class Command extends Resource {
   }
 
 /**
- * Mark a Command as rejected
+ * Method for {@link https://m2x.att.com/developer/documentation/v2/commands#Device-Marks-a-Command-as-Rejected Device Marks Command as rejected} endpoint.
  *
- * @link https://m2x.att.com/developer/documentation/v2/commands#Device-Marks-a-Command-as-Rejected
- *
- * @param array $data
- * @return MQTTResponse
+ * @param array $data Query parameters passed as keyword arguments. View M2X API Docs for listing of available parameters.
+ * @return MQTTResponse The API response, see M2X API docs for details
  */
   public function reject($data = null) {
     return $this->client->post($this->path() . '/reject', $data);
   }
 
 /**
- * Mark a Command as processed
+ * Method for {@link https://m2x.att.com/developer/documentation/v2/commands#Device-Marks-a-Command-as-Processed Device marks Command as processed} endpoint.
  *
- * @link https://m2x.att.com/developer/documentation/v2/commands#Device-Marks-a-Command-as-Processed
- *
- * @param array $data
- * @return MQTTResponse
+ * @param array $data Query parameters passed as keyword arguments. View M2X API Docs for listing of available parameters.
+ * @return MQTTResponse The API response, see M2X API docs for details
  */
   public function process($data = null) {
     return $this->client->post($this->path() . '/process', $data);
   }
 
 /**
- * View Command Details
+ * Method for {@link https://m2x.att.com/developer/documentation/v2/commands#View-Command-Details View Command Details} endpoint.
  *
- * @link https://m2x.att.com/developer/documentation/v2/commands#View-Command-Details
- *
- * @param array $data
- * @return MQTTResponse
+ * @param array $data Query parameters passed as keyword arguments. View M2X API Docs for listing of available parameters.
+ * @return Command The retrieved Command
  */
   public function details($data = null) {
     return $this->client->get('/commands' . '/' . $this->id , $data);
   }
 
 /**
- * View Device Command Details
+ * Method for {@link https://m2x.att.com/developer/documentation/v2/commands#Device-s-View-of-Command-Details View Device Command Details} endpoint.
  *
- * @link https://m2x.att.com/developer/documentation/v2/commands#Device-s-View-of-Command-Details
- *
- * @param array $data
- * @return MQTTResponse
+ * @param array $data Query parameters passed as keyword arguments. View M2X API Docs for listing of available parameters.
+ * @return Command The API response, see M2X API docs for details
  */
   public function viewDeviceCommandDetails($data = null) {
     return $this->client->get($this->path() , $data);

@@ -386,69 +386,65 @@ class MQTTClient {
     return $this->socket;
   }
 
-
 /**
- * Get an instance of a Device resource
+ * Method for {@link https://m2x.att.com/developer/documentation/v2/device#View-Device-Details View Device Details} endpoint.
  *
- * @param string $key
- * @return Key
+ * This method instantiates an instance of Device
+ * with all its attributes initialized.
+ *
+ * @param string $id Device ID to be retrieved
+ * @return Device The Device retrieved
  */
   public function device($id) {
     return new Device($this, array('id' => $id));
   }
 
 /**
- * Create a new device.
+ * Method for {@link https://m2x.att.com/developer/documentation/v2/device#Create-Device Create Device} endpoint.
  *
- * @param $data
- * @return Device
+ * @param array $data Query parameters passed as keyword arguments. View M2X API Docs for listing of available parameters.
+ * @return Device The newly created Device
  */
   public function createDevice($data) {
     return Device::create($this, $data);
   }
 
 /**
-  * Retrieve the list of devices accessible by the authenticated API key that
-  * meet the search criteria.
-  *
-  * @link https://m2x.att.com/developer/documentation/v2/device#Search-Devices
-  *
-  * @param $data
-  * @return Devices
-  */
+ * Method for {@link https://m2x.att.com/developer/documentation/v2/device#Search-Devices Search Devices} endpoint.
+ *
+ * @param $data Query parameters passed as keyword arguments. View M2X API Docs for listing of available parameters.
+ * @return MQTTResponse List of Device objects
+ */
   public function searchDevices($data) {
     return $this->post('/devices/search', $data);
   }
 
 /**
- * Get an instance of a Distribution resource
+ * Method for {@link https://m2x.att.com/developer/documentation/v2/distribution#View-Distribution-Details View Distribution Details} endpoint.
+ * This method instantiates an instance of Distribution with all its attributes initialized.
  *
- * @param string $id
- * @return Key
+ * @param string $id Distribution ID to be retrieved
+ * @return Distribution Distribution retrieved
  */
   public function distribution($id) {
     return new Distribution($this, array('id' => $id));
   }
 
 /**
- * Retrieve a list of commands associated with the user account.
+ * Method for {@link https://m2x.att.com/developer/documentation/v2/commands#List-Sent-Commands List Sent Commands} endpoint.
  *
- * @link https://m2x.att.com/developer/documentation/v2/commands#List-Sent-Commands
- *
- * @param array $params
- * @return CommandCollection
+ * @param array $params Query parameters passed as keyword arguments. View M2X API Docs for listing of available parameters.
+ * @return CommandCollection List of Commands retrieved
  */
   public function commands($params = array()) {
     return new CommandCollection($this, $params);
   }
 
 /**
- * Send a command to target devices.
+ * Method for {@link https://m2x.att.com/developer/documentation/v2/commands#Send-Command Send Command} endpoint.
  *
- * @link https://m2x.att.com/developer/documentation/v2/commands#Send-Command
- *
- * @param array $params
- * @return MQTTResponse
+ * @param array $params Query parameters passed as keyword arguments. View M2X API Docs for listing of available parameters.
+ * @return MQTTResponse The Command that was just sent
  */
   public function sendCommand($params = array()) {
     return $this->post('/commands', $params);
