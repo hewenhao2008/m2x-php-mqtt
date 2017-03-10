@@ -5,6 +5,9 @@ namespace Att\M2X\MQTT;
 use Att\M2X\MQTT\MQTTClient;
 use Att\M2X\MQTT\Device;
 
+/**
+ * Methods for interacting M2X Device Streams
+ */
 class Stream extends Resource {
 
 /**
@@ -33,7 +36,7 @@ class Stream extends Resource {
  * Disable the original POST factory
  *
  * @param MQTTClient $client
- * @param string $id
+ * @param array $data
  * @return void
  */
   public static function create($client, $data = array()) {
@@ -41,13 +44,13 @@ class Stream extends Resource {
   }
 
 /**
- * Create or update a stream resource
+ * Method for {@link https://m2x.att.com/developer/documentation/v2/device#Create-Update-Data-Stream Create/Update Data Stream} endpoint.
  *
- * @param MQTTClient $client
- * @param Resource $parent
- * @param string $name
- * @param array $data
- * @return Stream
+ * @param MQTTClient $client Client API
+ * @param Resource $parent Parent resource that this collection belongs to
+ * @param string $name Stream name to be created
+ * @param array $data Query parameters passed as keyword arguments. View M2X API Docs for listing of available parameters.
+ * @return Stream The newly created stream
  */
   public static function createStream(MQTTClient $client, Resource $parent, $name, $data) {
     $path = str_replace(':parent_path', $parent->path(), static::$path) . '/' . $name;
@@ -69,9 +72,9 @@ class Stream extends Resource {
   }
 
 /**
- * The resource id for the REST URL
+ * The stream id for the REST URL
  *
- * @return string
+ * @return string Stream ID
  */
   public function id() {
     return $this->name;
@@ -80,20 +83,18 @@ class Stream extends Resource {
 /**
  * Returns the path to the resource
  *
- * @return string
+ * @return string Stream path
  */
   public function path() {
     return str_replace(':parent_path', $this->parent->path(), self::$path) . '/' . $this->id();
   }
 
 /**
- * Update the current value of the stream. The timestamp is optional.
- * If ommited, the current server time will be used.
+ * Method for {@link https://m2x.att.com/developer/documentation/v2/device#Update-Data-Stream-Value Update Data Stream Value} endpoint.
+ * The timestamp is optional. If ommited, the current server time will be used.
  *
- * @link https://m2x.att.com/developer/documentation/v2/device#Update-Data-Stream-Value
- *
- * @param string $value
- * @param string $timestamp Time in ISO8601
+ * @param string $value Value to be updated
+ * @param string $timestamp Current Timestamp
  * @return void
  */
   public function updateValue($value, $timestamp = null) {
@@ -107,18 +108,9 @@ class Stream extends Resource {
   }
 
 /**
- * Post multiple values to the stream
+ * Method for {@link https://m2x.att.com/developer/documentation/v2/device#Post-Data-Stream-Values Post multiple values} endpoint.
  *
- * The `values` parameter is an array with the following format:
- *
- * array(
- *   array('timestamp' => <Time in ISO8601>, 'value' => x),
- *   array('timestamp' => <Time in ISO8601>, 'value' => y)
- * )
- *
- * https://m2x.att.com/developer/documentation/v2/device#Post-Data-Stream-Values
- *
- * @param array $data
+ * @param array $values Query parameters passed as keyword arguments. View M2X API Docs for listing of available parameters.
  * @return void
  */
   public function postValues($values) {

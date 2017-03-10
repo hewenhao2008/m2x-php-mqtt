@@ -53,7 +53,7 @@ class CommandCollection extends ResourceCollection {
 /**
  * Return the API path for the query
  *
- * @return void
+ * @return string path of the corresponding command
  */
   protected function path() {
     $class = static::$resourceClass;

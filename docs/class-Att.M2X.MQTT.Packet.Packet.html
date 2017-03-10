@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Att\M2X\MQTT\Packet\Packet</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-Att.html">
+						Att<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-Att.M2X.html">
+						M2X<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-Att.M2X.MQTT.html">
+						MQTT<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Att.M2X.MQTT.Error.html">
+						Error					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Att.M2X.MQTT.Net.html">
+						Net					</a>
+
+						</li>
+				<li class="active">
+					<a href="namespace-Att.M2X.MQTT.Packet.html">
+						Packet					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Att.M2X.MQTT.Test.html">
+						Test					</a>
+
+						</li>
+							</ul></li></ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Att.M2X.MQTT.Packet.ConnackPacket.html">ConnackPacket</a></li>
+				<li><a href="class-Att.M2X.MQTT.Packet.ConnectPacket.html">ConnectPacket</a></li>
+				<li><a href="class-Att.M2X.MQTT.Packet.DisconnectPacket.html">DisconnectPacket</a></li>
+				<li class="active"><a href="class-Att.M2X.MQTT.Packet.Packet.html">Packet</a></li>
+				<li><a href="class-Att.M2X.MQTT.Packet.PingreqPacket.html">PingreqPacket</a></li>
+				<li><a href="class-Att.M2X.MQTT.Packet.PingrespPacket.html">PingrespPacket</a></li>
+				<li><a href="class-Att.M2X.MQTT.Packet.PublishPacket.html">PublishPacket</a></li>
+				<li><a href="class-Att.M2X.MQTT.Packet.SubackPacket.html">SubackPacket</a></li>
+				<li><a href="class-Att.M2X.MQTT.Packet.SubcompPacket.html">SubcompPacket</a></li>
+				<li><a href="class-Att.M2X.MQTT.Packet.SubrecPacket.html">SubrecPacket</a></li>
+				<li><a href="class-Att.M2X.MQTT.Packet.SubrelPacket.html">SubrelPacket</a></li>
+				<li><a href="class-Att.M2X.MQTT.Packet.SubscribePacket.html">SubscribePacket</a></li>
+				<li><a href="class-Att.M2X.MQTT.Packet.UnsubackPacket.html">UnsubackPacket</a></li>
+				<li><a href="class-Att.M2X.MQTT.Packet.UnsubscribePacket.html">UnsubscribePacket</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Att.M2X.MQTT.Packet.html" title="Summary of Att\M2X\MQTT\Packet"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Packet</h1>
+
+
+
+
+
+	<div>
+		<h4>Direct known subclasses</h4>
+			<a href="class-Att.M2X.MQTT.Packet.ConnackPacket.html">Att\M2X\MQTT\Packet\ConnackPacket</a>, 
+			<a href="class-Att.M2X.MQTT.Packet.ConnectPacket.html">Att\M2X\MQTT\Packet\ConnectPacket</a>, 
+			<a href="class-Att.M2X.MQTT.Packet.SubscribePacket.html">Att\M2X\MQTT\Packet\SubscribePacket</a>, 
+			<a href="class-Att.M2X.MQTT.Packet.UnsubackPacket.html">Att\M2X\MQTT\Packet\UnsubackPacket</a>, 
+			<a href="class-Att.M2X.MQTT.Packet.UnsubscribePacket.html">Att\M2X\MQTT\Packet\UnsubscribePacket</a>, 
+			<a href="class-Att.M2X.MQTT.Packet.DisconnectPacket.html">Att\M2X\MQTT\Packet\DisconnectPacket</a>, 
+			<a href="class-Att.M2X.MQTT.Packet.PingreqPacket.html">Att\M2X\MQTT\Packet\PingreqPacket</a>, 
+			<a href="class-Att.M2X.MQTT.Packet.PingrespPacket.html">Att\M2X\MQTT\Packet\PingrespPacket</a>, 
+			<a href="class-Att.M2X.MQTT.Packet.PublishPacket.html">Att\M2X\MQTT\Packet\PublishPacket</a>, 
+			<a href="class-Att.M2X.MQTT.Packet.SubackPacket.html">Att\M2X\MQTT\Packet\SubackPacket</a>, 
+			<a href="class-Att.M2X.MQTT.Packet.SubcompPacket.html">Att\M2X\MQTT\Packet\SubcompPacket</a>, 
+			<a href="class-Att.M2X.MQTT.Packet.SubrecPacket.html">Att\M2X\MQTT\Packet\SubrecPacket</a>, 
+			<a href="class-Att.M2X.MQTT.Packet.SubrelPacket.html">Att\M2X\MQTT\Packet\SubrelPacket</a>
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Att.html">Att</a>\<a href="namespace-Att.M2X.html">M2X</a>\<a href="namespace-Att.M2X.MQTT.html">MQTT</a>\<a href="namespace-Att.M2X.MQTT.Packet.html">Packet</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-Att.M2X.MQTT.Packet.Packet.html#5-263" title="Go to source code">Packet/Packet.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.Packet.Packet.html#108-111" title="Go to source code">__construct</a>( <span> <var>$type</var></span>, <span> <var>$flags</var> = <span class="php-num">0x00</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setOptions" id="_setOptions">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setOptions">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.Packet.Packet.html#113-125" title="Go to source code">setOptions</a>( <span>array <var>$options</var></span> )</code>
+
+		<div class="description short">
+			<p>Set packet options</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Set packet options</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="encodeString" id="_encodeString">
+
+		<td class="attributes"><code>
+			 protected 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_encodeString">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.Packet.Packet.html#127-138" title="Go to source code">encodeString</a>( <span>string <var>$string</var></span> )</code>
+
+		<div class="description short">
+			<p>Add a string to the buffer</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Add a string to the buffer</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$string</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="encodeBody" id="_encodeBody">
+
+		<td class="attributes"><code>
+			 protected 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_encodeBody">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.Packet.Packet.html#140-146" title="Go to source code">encodeBody</a>( )</code>
+
+		<div class="description short">
+			<p>Encoded the packet properties into the buffer.
+This method has to be overwritten in the subclass.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Encoded the packet properties into the buffer.
+This method has to be overwritten in the subclass.</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parse" id="_parse">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_parse">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.Packet.Packet.html#148-158" title="Go to source code">parse</a>( <span>string <var>$header</var></span>, <span>string <var>$data</var></span> )</code>
+
+		<div class="description short">
+			<p>Initializes the packet from a binary string received from the socket.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Initializes the packet from a binary string received from the socket.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$header</var></dt>
+					<dd></dd>
+					<dt><var>$data</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parseBody" id="_parseBody">
+
+		<td class="attributes"><code>
+			 protected 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_parseBody">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.Packet.Packet.html#160-167" title="Go to source code">parseBody</a>( <span>string <var>$data</var></span> )</code>
+
+		<div class="description short">
+			<p>Parses the body and sets the properties of the Packet object.
+This method has to be overwritten in the subclass.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Parses the body and sets the properties of the Packet object.
+This method has to be overwritten in the subclass.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="encode" id="_encode">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_encode">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.Packet.Packet.html#169-199" title="Go to source code">encode</a>( )</code>
+
+		<div class="description short">
+			<p>Encode a packet object and return the its binary string.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Encode a packet object and return the its binary string.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="read" id="_read">
+
+		<td class="attributes"><code>
+			 public static
+
+			<code><a href="class-Att.M2X.MQTT.Packet.Packet.html">Att\M2X\MQTT\Packet\Packet</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_read">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.Packet.Packet.html#201-235" title="Go to source code">read</a>( <span>Socket <var>$socket</var></span> )</code>
+
+		<div class="description short">
+			<p>Read a packet from a socket.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Read a packet from a socket.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$socket</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.Packet.Packet.html">Att\M2X\MQTT\Packet\Packet</a></code>
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					Exception
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="type" id="_type">
+
+		<td class="attributes"><code>
+			 public 
+
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_type">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.Packet.Packet.html#237-244" title="Go to source code">type</a>( )</code>
+
+		<div class="description short">
+			<p>Return the packet type</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Return the packet type</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					integer
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="flags" id="_flags">
+
+		<td class="attributes"><code>
+			 public 
+
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_flags">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.Packet.Packet.html#246-253" title="Go to source code">flags</a>( )</code>
+
+		<div class="description short">
+			<p>Returns the packet flags</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Returns the packet flags</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					integer
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="buffer" id="_buffer">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_buffer">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.Packet.Packet.html#255-262" title="Go to source code">buffer</a>( )</code>
+
+		<div class="description short">
+			<p>Return the buffer</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Return the buffer</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary constants" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="PROTOCOL_NAME" id="PROTOCOL_NAME">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#29-32" title="Go to source code"><b>PROTOCOL_NAME</b></a>
+			</code>
+
+			<div class="description short">
+				<p>Protocol name</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Protocol name</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#PROTOCOL_NAME" class="anchor">#</a>
+				<code><span class="php-quote">'MQIsdp'</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="PROTOCOL_VERSION" id="PROTOCOL_VERSION">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#34-37" title="Go to source code"><b>PROTOCOL_VERSION</b></a>
+			</code>
+
+			<div class="description short">
+				<p>Protocol version</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Protocol version</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#PROTOCOL_VERSION" class="anchor">#</a>
+				<code><span class="php-num">0x03</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="TYPE_CONNECT" id="TYPE_CONNECT">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#39-42" title="Go to source code"><b>TYPE_CONNECT</b></a>
+			</code>
+
+			<div class="description short">
+				<p>Packet types</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Packet types</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#TYPE_CONNECT" class="anchor">#</a>
+				<code><span class="php-num">0x10</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="TYPE_CONNACK" id="TYPE_CONNACK">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#43" title="Go to source code"><b>TYPE_CONNACK</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#TYPE_CONNACK" class="anchor">#</a>
+				<code><span class="php-num">0x20</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="TYPE_PUBLISH" id="TYPE_PUBLISH">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#44" title="Go to source code"><b>TYPE_PUBLISH</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#TYPE_PUBLISH" class="anchor">#</a>
+				<code><span class="php-num">0x30</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="TYPE_PUBACK" id="TYPE_PUBACK">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#45" title="Go to source code"><b>TYPE_PUBACK</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#TYPE_PUBACK" class="anchor">#</a>
+				<code><span class="php-num">0x40</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="TYPE_PUBREC" id="TYPE_PUBREC">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#46" title="Go to source code"><b>TYPE_PUBREC</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#TYPE_PUBREC" class="anchor">#</a>
+				<code><span class="php-num">0x50</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="TYPE_PUBREL" id="TYPE_PUBREL">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#47" title="Go to source code"><b>TYPE_PUBREL</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#TYPE_PUBREL" class="anchor">#</a>
+				<code><span class="php-num">0x60</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="TYPE_PUBCOMP" id="TYPE_PUBCOMP">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#48" title="Go to source code"><b>TYPE_PUBCOMP</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#TYPE_PUBCOMP" class="anchor">#</a>
+				<code><span class="php-num">0x70</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="TYPE_SUBSCRIBE" id="TYPE_SUBSCRIBE">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#49" title="Go to source code"><b>TYPE_SUBSCRIBE</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#TYPE_SUBSCRIBE" class="anchor">#</a>
+				<code><span class="php-num">0x80</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="TYPE_SUBACK" id="TYPE_SUBACK">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#50" title="Go to source code"><b>TYPE_SUBACK</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#TYPE_SUBACK" class="anchor">#</a>
+				<code><span class="php-num">0x90</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="TYPE_UNSUBSCRIBE" id="TYPE_UNSUBSCRIBE">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#51" title="Go to source code"><b>TYPE_UNSUBSCRIBE</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#TYPE_UNSUBSCRIBE" class="anchor">#</a>
+				<code><span class="php-num">0xA0</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="TYPE_UNSUBACK" id="TYPE_UNSUBACK">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#52" title="Go to source code"><b>TYPE_UNSUBACK</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#TYPE_UNSUBACK" class="anchor">#</a>
+				<code><span class="php-num">0xB0</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="TYPE_PINGREQ" id="TYPE_PINGREQ">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#53" title="Go to source code"><b>TYPE_PINGREQ</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#TYPE_PINGREQ" class="anchor">#</a>
+				<code><span class="php-num">0xC0</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="TYPE_PINGRESP" id="TYPE_PINGRESP">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#54" title="Go to source code"><b>TYPE_PINGRESP</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#TYPE_PINGRESP" class="anchor">#</a>
+				<code><span class="php-num">0xD0</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="TYPE_DISCONNECT" id="TYPE_DISCONNECT">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#55" title="Go to source code"><b>TYPE_DISCONNECT</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#TYPE_DISCONNECT" class="anchor">#</a>
+				<code><span class="php-num">0xE0</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="QOS0" id="QOS0">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#57-60" title="Go to source code"><b>QOS0</b></a>
+			</code>
+
+			<div class="description short">
+				<p>Quality of service</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Quality of service</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#QOS0" class="anchor">#</a>
+				<code><span class="php-num">0x00</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="QOS1" id="QOS1">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#61" title="Go to source code"><b>QOS1</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#QOS1" class="anchor">#</a>
+				<code><span class="php-num">0x02</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="QOS2" id="QOS2">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#62" title="Go to source code"><b>QOS2</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#QOS2" class="anchor">#</a>
+				<code><span class="php-num">0x04</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="RETAIN" id="RETAIN">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#64-67" title="Go to source code"><b>RETAIN</b></a>
+			</code>
+
+			<div class="description short">
+				<p>Retain flag</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Retain flag</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#RETAIN" class="anchor">#</a>
+				<code><span class="php-num">0x01</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="DUP" id="DUP">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#69-72" title="Go to source code"><b>DUP</b></a>
+			</code>
+
+			<div class="description short">
+				<p>Duplicate flag</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Duplicate flag</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#DUP" class="anchor">#</a>
+				<code><span class="php-num">0x08</span></code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="PACKET_TYPES" id="$PACKET_TYPES">
+		<td class="attributes"><code>
+			public static 
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#7-27" title="Go to source code"><var>$PACKET_TYPES</var></a>
+
+			<div class="description short">
+				<p>Packet class map</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Packet class map</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$PACKET_TYPES" class="anchor">#</a>
+				<code><span class="php-keyword1">array</span>(
+<span class="php-num">1</span>  =&gt; <span class="php-quote">'\Att\M2X\MQTT\Packet\ConnectPacket'</span>,
+<span class="php-num">2</span>  =&gt; <span class="php-quote">'\Att\M2X\MQTT\Packet\ConnackPacket'</span>,
+<span class="php-num">3</span>  =&gt; <span class="php-quote">'\Att\M2X\MQTT\Packet\PublishPacket'</span>,
+<span class="php-num">4</span>  =&gt; <span class="php-quote">'\Att\M2X\MQTT\Packet\PubackPacket'</span>,
+<span class="php-num">5</span>  =&gt; <span class="php-quote">'\Att\M2X\MQTT\Packet\PubrecPacket'</span>,
+<span class="php-num">6</span>  =&gt; <span class="php-quote">'\Att\M2X\MQTT\Packet\PubrelPacket'</span>,
+<span class="php-num">7</span>  =&gt; <span class="php-quote">'\Att\M2X\MQTT\Packet\PubcompPacket'</span>,
+<span class="php-num">8</span>  =&gt; <span class="php-quote">'\Att\M2X\MQTT\Packet\SubscribePacket'</span>,
+<span class="php-num">9</span>  =&gt; <span class="php-quote">'\Att\M2X\MQTT\Packet\SubackPacket'</span>,
+<span class="php-num">10</span> =&gt; <span class="php-quote">'\Att\M2X\MQTT\Packet\UnsubscribePacket'</span>,
+<span class="php-num">11</span> =&gt; <span class="php-quote">'\Att\M2X\MQTT\Packet\UnsubackPacket'</span>,
+<span class="php-num">12</span> =&gt; <span class="php-quote">'\Att\M2X\MQTT\Packet\PingreqPacket'</span>,
+<span class="php-num">13</span> =&gt; <span class="php-quote">'\Att\M2X\MQTT\Packet\PingrespPacket'</span>,
+<span class="php-num">14</span> =&gt; <span class="php-quote">'\Att\M2X\MQTT\Packet\DisconnectPacket'</span>
+  )</code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="buffer" id="$buffer">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#74-79" title="Go to source code"><var>$buffer</var></a>
+
+			<div class="description short">
+				<p>Holds the buffer to be sent to the broker</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Holds the buffer to be sent to the broker</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$buffer" class="anchor">#</a>
+				<code><span class="php-quote">''</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="type" id="$type">
+		<td class="attributes"><code>
+			protected  
+			null
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#81-86" title="Go to source code"><var>$type</var></a>
+
+			<div class="description short">
+				<p>The message type</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The message type</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$type" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="topic" id="$topic">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#88-92" title="Go to source code"><var>$topic</var></a>
+
+			<div class="description short">
+				<p>The topic for received messages</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The topic for received messages</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$topic" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="id" id="$id">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#94-99" title="Go to source code"><var>$id</var></a>
+
+			<div class="description short">
+				<p>Identifier to link control packets together</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Identifier to link control packets together</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$id" class="anchor">#</a>
+				<code><span class="php-num">0</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="flags" id="$flags">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.Packet.Packet.html#101-106" title="Go to source code"><var>$flags</var></a>
+
+			<div class="description short">
+				<p>The 4 bits of flags in the fixed header</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The 4 bits of flags in the fixed header</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$flags" class="anchor">#</a>
+				<code><span class="php-num">0x00</span></code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

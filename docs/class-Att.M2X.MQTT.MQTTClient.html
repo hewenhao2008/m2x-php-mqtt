@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Att\M2X\MQTT\MQTTClient</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-Att.html">
+						Att<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-Att.M2X.html">
+						M2X<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-Att.M2X.MQTT.html">
+						MQTT<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Att.M2X.MQTT.Error.html">
+						Error					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Att.M2X.MQTT.Net.html">
+						Net					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Att.M2X.MQTT.Packet.html">
+						Packet					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Att.M2X.MQTT.Test.html">
+						Test					</a>
+
+						</li>
+							</ul></li></ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Att.M2X.MQTT.Command.html">Command</a></li>
+				<li><a href="class-Att.M2X.MQTT.CommandCollection.html">CommandCollection</a></li>
+				<li><a href="class-Att.M2X.MQTT.Device.html">Device</a></li>
+				<li><a href="class-Att.M2X.MQTT.Distribution.html">Distribution</a></li>
+				<li class="active"><a href="class-Att.M2X.MQTT.MQTTClient.html">MQTTClient</a></li>
+				<li><a href="class-Att.M2X.MQTT.MQTTResponse.html">MQTTResponse</a></li>
+				<li><a href="class-Att.M2X.MQTT.Resource.html">Resource</a></li>
+				<li><a href="class-Att.M2X.MQTT.ResourceCollection.html">ResourceCollection</a></li>
+				<li><a href="class-Att.M2X.MQTT.Stream.html">Stream</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Att.M2X.MQTT.html" title="Summary of Att\M2X\MQTT"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class MQTTClient</h1>
+
+
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Att.html">Att</a>\<a href="namespace-Att.M2X.html">M2X</a>\<a href="namespace-Att.M2X.MQTT.html">MQTT</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-Att.M2X.MQTT.MQTTClient.html#18-453" title="Go to source code">MQTTClient.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#110-141" title="Go to source code">__construct</a>( <span>string <var>$apiKey</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			<p>Create a new instance of the MQTT Client, by default the client
+will connect to the live API of m2x and sets a random clientId.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Create a new instance of the MQTT Client, by default the client
+will connect to the live API of m2x and sets a random clientId.</p>
+
+<p>Optional options:
+- host: IP address of the MQTT broker
+- port: Port for the MQTT broker connection
+- clientId: The name of the Client ID to send to the broker</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$apiKey</var></dt>
+					<dd></dd>
+					<dt><var>$options</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="connect" id="_connect">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_connect">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#143-165" title="Go to source code">connect</a>( )</code>
+
+		<div class="description short">
+			<p>Connect to the broker</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Connect to the broker</p>
+
+
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.Error.ProtocolException.html">Att\M2X\MQTT\Error\ProtocolException</a></code><br>
+					SocketException
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="publish" id="_publish">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_publish">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#167-182" title="Go to source code">publish</a>( <span>string <var>$topic</var></span>, <span>string <var>$payload</var> = <span class="php-quote">''</span></span>, <span>string <var>$flags</var> = <span class="php-num">0x00</span></span> )</code>
+
+		<div class="description short">
+			<p>Publish a message to the broker.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Publish a message to the broker.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$topic</var></dt>
+					<dd></dd>
+					<dt><var>$payload</var></dt>
+					<dd></dd>
+					<dt><var>$flags</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="subscribe" id="_subscribe">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_subscribe">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#184-199" title="Go to source code">subscribe</a>( <span>string <var>$topic</var></span>, <span>string <var>$flags</var> = <span class="php-num">0x00</span></span> )</code>
+
+		<div class="description short">
+			<p>Subscribe to a topic</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Subscribe to a topic</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$topic</var></dt>
+					<dd></dd>
+					<dt><var>$flags</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="disconnect" id="_disconnect">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_disconnect">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#201-210" title="Go to source code">disconnect</a>( )</code>
+
+		<div class="description short">
+			<p>Send a DISCONNECT packet to the MQTT broker</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Send a DISCONNECT packet to the MQTT broker</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendPacket" id="_sendPacket">
+
+		<td class="attributes"><code>
+			 protected 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendPacket">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#212-221" title="Go to source code">sendPacket</a>( <span><code><a href="class-Att.M2X.MQTT.Packet.Packet.html">Att\M2X\MQTT\Packet\Packet</a></code> <var>$packet</var></span> )</code>
+
+		<div class="description short">
+			<p>Send a Packet object to the broker</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Send a Packet object to the broker</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$packet</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="receiveConnack" id="_receiveConnack">
+
+		<td class="attributes"><code>
+			 protected 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_receiveConnack">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#223-239" title="Go to source code">receiveConnack</a>( )</code>
+
+		<div class="description short">
+			<p>Handle the response of the CONNECT call and check for a successfull connection</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Handle the response of the CONNECT call and check for a successfull connection</p>
+
+
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.Error.ProtocolException.html">Att\M2X\MQTT\Error\ProtocolException</a></code>
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="receivePacket" id="_receivePacket">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Att.M2X.MQTT.Packet.Packet.html">Att\M2X\MQTT\Packet\Packet</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_receivePacket">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#241-266" title="Go to source code">receivePacket</a>( <span> <var>$topic</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			<p>Listen on the socket and receive a single packet.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Listen on the socket and receive a single packet.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$topic</var></dt>
+					<dd>return packets from this topic (optional)</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.Packet.Packet.html">Att\M2X\MQTT\Packet\Packet</a></code>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="nextPacketId" id="_nextPacketId">
+
+		<td class="attributes"><code>
+			 public 
+
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_nextPacketId">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#268-276" title="Go to source code">nextPacketId</a>( )</code>
+
+		<div class="description short">
+			<p>Returns the next available packet id</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Returns the next available packet id</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					integer
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="nextRequestId" id="_nextRequestId">
+
+		<td class="attributes"><code>
+			 protected 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_nextRequestId">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#278-285" title="Go to source code">nextRequestId</a>( )</code>
+
+		<div class="description short">
+			<p>Generate a request id for M2X requests</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Generate a request id for M2X requests</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="generateClientId" id="_generateClientId">
+
+		<td class="attributes"><code>
+			 protected 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_generateClientId">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#287-294" title="Go to source code">generateClientId</a>( )</code>
+
+		<div class="description short">
+			<p>Generate a random client id</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Generate a random client id</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get" id="_get">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Att.M2X.MQTT.MQTTResponse.html">Att\M2X\MQTT\MQTTResponse</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#296-305" title="Go to source code">get</a>( <span>string <var>$path</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			<p>Perform a GET request to the API.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Perform a GET request to the API.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd></dd>
+					<dt><var>$params</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.MQTTResponse.html">Att\M2X\MQTT\MQTTResponse</a></code>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="post" id="_post">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Att.M2X.MQTT.MQTTResponse.html">Att\M2X\MQTT\MQTTResponse</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_post">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#307-316" title="Go to source code">post</a>( <span>string <var>$path</var></span>, <span>array <var>$vars</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			<p>Perform a POST request to the API.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Perform a POST request to the API.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd></dd>
+					<dt><var>$vars</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.MQTTResponse.html">Att\M2X\MQTT\MQTTResponse</a></code>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="put" id="_put">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Att.M2X.MQTT.MQTTResponse.html">Att\M2X\MQTT\MQTTResponse</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_put">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#318-327" title="Go to source code">put</a>( <span>string <var>$path</var></span>, <span>array <var>$vars</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			<p>Perform an PUT request to the API.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Perform an PUT request to the API.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd></dd>
+					<dt><var>$vars</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.MQTTResponse.html">Att\M2X\MQTT\MQTTResponse</a></code>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendRequest" id="_sendRequest">
+
+		<td class="attributes"><code>
+			 protected 
+
+			<code><a href="class-Att.M2X.MQTT.MQTTResponse.html">Att\M2X\MQTT\MQTTResponse</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendRequest">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#329-357" title="Go to source code">sendRequest</a>( <span>string <var>$method</var></span>, <span>string <var>$resource</var></span>, <span> <var>$vars</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			<p>Send a pseudo HTTP request to the M2X API</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Send a pseudo HTTP request to the M2X API</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$method</var></dt>
+					<dd></dd>
+					<dt><var>$resource</var></dt>
+					<dd></dd>
+					<dt><var>$vars</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.MQTTResponse.html">Att\M2X\MQTT\MQTTResponse</a></code>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="handleResponse" id="_handleResponse">
+
+		<td class="attributes"><code>
+			 protected 
+
+			HttpResponse
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_handleResponse">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#359-375" title="Go to source code">handleResponse</a>( <span><code><a href="class-Att.M2X.MQTT.MQTTResponse.html">Att\M2X\MQTT\MQTTResponse</a></code> <var>$response</var></span> )</code>
+
+		<div class="description short">
+			<p>Checks the MQTTResponse for errors and throws an exception, if
+no errors are encountered, the MQTTResponse is returned.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Checks the MQTTResponse for errors and throws an exception, if
+no errors are encountered, the MQTTResponse is returned.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$response</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					HttpResponse
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.Error.M2XException.html">Att\M2X\MQTT\Error\M2XException</a></code>
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="socket" id="_socket">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Att.M2X.MQTT.Net.Socket.html">Att\M2X\MQTT\Net\Socket</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_socket">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#377-387" title="Go to source code">socket</a>( )</code>
+
+		<div class="description short">
+			<p>Return the socket instance, create new one if needed</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Return the socket instance, create new one if needed</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.Net.Socket.html">Att\M2X\MQTT\Net\Socket</a></code>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="device" id="_device">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Att.M2X.MQTT.Device.html">Att\M2X\MQTT\Device</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_device">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#389-400" title="Go to source code">device</a>( <span>string <var>$id</var></span> )</code>
+
+		<div class="description short">
+			<p>Method for <a href="https://m2x.att.com/developer/documentation/v2/device#View-Device-Details">View Device Details</a> endpoint.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Method for <a href="https://m2x.att.com/developer/documentation/v2/device#View-Device-Details">View Device Details</a> endpoint.</p>
+
+<p>This method instantiates an instance of Device
+with all its attributes initialized.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$id</var></dt>
+					<dd>Device ID to be retrieved</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.Device.html">Att\M2X\MQTT\Device</a></code><br>The Device retrieved
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createDevice" id="_createDevice">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Att.M2X.MQTT.Device.html">Att\M2X\MQTT\Device</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createDevice">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#402-410" title="Go to source code">createDevice</a>( <span>array <var>$data</var></span> )</code>
+
+		<div class="description short">
+			<p>Method for <a href="https://m2x.att.com/developer/documentation/v2/device#Create-Device">Create Device</a> endpoint.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Method for <a href="https://m2x.att.com/developer/documentation/v2/device#Create-Device">Create Device</a> endpoint.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd>Query parameters passed as keyword arguments. View M2X API Docs for listing of available parameters.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.Device.html">Att\M2X\MQTT\Device</a></code><br>The newly created Device
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="searchDevices" id="_searchDevices">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Att.M2X.MQTT.MQTTResponse.html">Att\M2X\MQTT\MQTTResponse</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_searchDevices">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#412-420" title="Go to source code">searchDevices</a>( <span> <var>$data</var></span> )</code>
+
+		<div class="description short">
+			<p>Method for <a href="https://m2x.att.com/developer/documentation/v2/device#Search-Devices">Search Devices</a> endpoint.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Method for <a href="https://m2x.att.com/developer/documentation/v2/device#Search-Devices">Search Devices</a> endpoint.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd>parameters passed as keyword arguments. View M2X API Docs for listing of available parameters.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.MQTTResponse.html">Att\M2X\MQTT\MQTTResponse</a></code><br>List of Device objects
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="distribution" id="_distribution">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Att.M2X.MQTT.Distribution.html">Att\M2X\MQTT\Distribution</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_distribution">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#422-432" title="Go to source code">distribution</a>( <span>string <var>$id</var></span> )</code>
+
+		<div class="description short">
+			<p>Method for <a href="https://m2x.att.com/developer/documentation/v2/distribution#View-Distribution-Details">View Distribution Details</a> endpoint.
+This method instantiates an instance of Distribution
+with all its attributes initialized.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Method for <a href="https://m2x.att.com/developer/documentation/v2/distribution#View-Distribution-Details">View Distribution Details</a> endpoint.
+This method instantiates an instance of Distribution
+with all its attributes initialized.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$id</var></dt>
+					<dd>Distribution ID to be retrieved</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.Distribution.html">Att\M2X\MQTT\Distribution</a></code><br>Distribution retrieved
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="commands" id="_commands">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Att.M2X.MQTT.CommandCollection.html">Att\M2X\MQTT\CommandCollection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_commands">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#434-442" title="Go to source code">commands</a>( <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			<p>Method for <a href="https://m2x.att.com/developer/documentation/v2/commands#List-Sent-Commands">List Sent Commands</a> endpoint.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Method for <a href="https://m2x.att.com/developer/documentation/v2/commands#List-Sent-Commands">List Sent Commands</a> endpoint.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$params</var></dt>
+					<dd>Query parameters passed as keyword arguments. View M2X API Docs for listing of available parameters.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.CommandCollection.html">Att\M2X\MQTT\CommandCollection</a></code><br>List of Commands retrieved
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendCommand" id="_sendCommand">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Att.M2X.MQTT.MQTTResponse.html">Att\M2X\MQTT\MQTTResponse</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendCommand">#</a>
+		<code><a href="source-class-Att.M2X.MQTT.MQTTClient.html#444-452" title="Go to source code">sendCommand</a>( <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			<p>Method for <a href="https://m2x.att.com/developer/documentation/v2/commands#Send-Command">Send Command</a> endpoint.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Method for <a href="https://m2x.att.com/developer/documentation/v2/commands#Send-Command">Send Command</a> endpoint.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$params</var></dt>
+					<dd>Query parameters passed as keyword arguments. View M2X API Docs for listing of available parameters.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Att.M2X.MQTT.MQTTResponse.html">Att\M2X\MQTT\MQTTResponse</a></code><br>The Command that was just sent
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary constants" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="VERSION" id="VERSION">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.MQTTClient.html#20-24" title="Go to source code"><b>VERSION</b></a>
+			</code>
+
+			<div class="description short">
+				<p>Version number of this library</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Version number of this library</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#VERSION" class="anchor">#</a>
+				<code><span class="php-quote">'3.1.0'</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="DEFAULT_API_HOST" id="DEFAULT_API_HOST">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Att.M2X.MQTT.MQTTClient.html#26-30" title="Go to source code"><b>DEFAULT_API_HOST</b></a>
+			</code>
+
+			<div class="description short">
+				<p>The hostname of the default broker</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The hostname of the default broker</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#DEFAULT_API_HOST" class="anchor">#</a>
+				<code><span class="php-quote">'api-m2x.att.com'</span></code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="host" id="$host">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.MQTTClient.html#32-37" title="Go to source code"><var>$host</var></a>
+
+			<div class="description short">
+				<p>Hostname of the remote server</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Hostname of the remote server</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$host" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="port" id="$port">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.MQTTClient.html#39-44" title="Go to source code"><var>$port</var></a>
+
+			<div class="description short">
+				<p>Port of the remote server (default: 1883)</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Port of the remote server (default: 1883)</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$port" class="anchor">#</a>
+				<code><span class="php-num">1883</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="socket" id="$socket">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-Att.M2X.MQTT.Net.Socket.html">Att\M2X\MQTT\Net\Socket</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.MQTTClient.html#46-51" title="Go to source code"><var>$socket</var></a>
+
+			<div class="description short">
+				<p>Holds the socket class</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Holds the socket class</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$socket" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="clientId" id="$clientId">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.MQTTClient.html#53-59" title="Go to source code"><var>$clientId</var></a>
+
+			<div class="description short">
+				<p>The Client Identifier (Client ID) is between 1 and 23 characters long,
+and uniquely identifies the client to the server.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The Client Identifier (Client ID) is between 1 and 23 characters long,
+and uniquely identifies the client to the server.</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$clientId" class="anchor">#</a>
+				<code><span class="php-quote">''</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="username" id="$username">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.MQTTClient.html#61-66" title="Go to source code"><var>$username</var></a>
+
+			<div class="description short">
+				<p>The username for authenticating with the server</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The username for authenticating with the server</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$username" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="password" id="$password">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.MQTTClient.html#68-73" title="Go to source code"><var>$password</var></a>
+
+			<div class="description short">
+				<p>The password for authenticating with the server</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The password for authenticating with the server</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$password" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="lastPacketId" id="$lastPacketId">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.MQTTClient.html#75-80" title="Go to source code"><var>$lastPacketId</var></a>
+
+			<div class="description short">
+				<p>Holds the counter for control packets</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Holds the counter for control packets</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$lastPacketId" class="anchor">#</a>
+				<code><span class="php-num">0</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="qos" id="$qos">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.MQTTClient.html#82-87" title="Go to source code"><var>$qos</var></a>
+
+			<div class="description short">
+				<p>The QOS level used</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The QOS level used</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$qos" class="anchor">#</a>
+				<code>Att\M2X\MQTT\Packet::QOS0</code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="responsesTopic" id="$responsesTopic">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.MQTTClient.html#89-94" title="Go to source code"><var>$responsesTopic</var></a>
+
+			<div class="description short">
+				<p>The topic for the responses</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The topic for the responses</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$responsesTopic" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="commandsTopic" id="$commandsTopic">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.MQTTClient.html#96-101" title="Go to source code"><var>$commandsTopic</var></a>
+
+			<div class="description short">
+				<p>The topic for the commands</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The topic for the commands</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$commandsTopic" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="inbox" id="$inbox">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Att.M2X.MQTT.MQTTClient.html#103-108" title="Go to source code"><var>$inbox</var></a>
+
+			<div class="description short">
+				<p>Contains received packets</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Contains received packets</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$inbox" class="anchor">#</a>
+				<code><span class="php-keyword1">array</span>()</code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

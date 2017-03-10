@@ -2,6 +2,9 @@
 
 namespace Att\M2X\MQTT;
 
+/**
+ * Method for Wrapper for {@link https://m2x.att.com/developer/documentation/v2/distribution M2X Distribution} API
+ */
 class Distribution extends Resource {
 
 /**
@@ -23,19 +26,17 @@ class Distribution extends Resource {
 /**
  * The resource id for the REST URL
  *
- * @return string
+ * @return string Distribution ID
  */
   public function id() {
     return $this->id;
   }
 
 /**
- * Add a new device to an existing distribution.
+ * Method for {@link https://m2x.att.com/developer/documentation/v2/distribution#Add-Device-to-an-existing-Distribution Add device to an existing distribution} endpoint.
  *
- * @link https://m2x.att.com/developer/documentation/v2/distribution#add-device-to-an-existing-distribution
- *
- * @param string $serial
- * @return Device
+ * @param string $serial Serial of the device to be added
+ * @return Device Newly created device
  */
   public function addDevice($serial) {
       $data = array('serial' => $serial);
